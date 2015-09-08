@@ -1,0 +1,177 @@
+	Rights used in operation:
+
+table	operation	access				user\
+		Search							[null]
+Publications		R	-
+
+		Authorisation					[null]
+Users				R	-
+		New / delete user				[self / administrator]
+Users				R	W
+		Elevate / reduce rights			[administrator]
+Users				R	W
+
+		N/R/C PR suggestion				[suggester]
+Publications		R	-
+Suggestions			R	W
+		Accept / reject N/R/C PR		[moderator]
+Suggestions			R	W
+		New / remove / change PR		[moderator]
+Publications		R	W
+
+'Authors*' table is connected to 'Publications' table
+
+
+#############
+
+	User management
+
+Registration
+		check if not already exists						[Users]
+	success:
+		generate uid									[Users]
+		add infos@										[Users]
+		(after confirmation ?) give suggester rights	[Users]
+
+Changing profile information
+		check if exists									[Users]
+	success:
+		apply infos@									[Users]
+
+Authorisation
+		check credentials								[Users]
+	success:
+		(?) give session token
+
+Deleting
+		by uid
+		check if exists									[Users]
+		check if [sid].by_uid = self or administrator (?)[Users]
+	success:
+		reduce rights									[Users]
+		remove record (delayed ?)						[Users]
+		(?) reset session tokens
+
+Elevate / reduce rights
+		by uid
+		check if exists									[Users]
+	success:
+		change rights									[Users]
+		(?) reset session tokens
+
+
+#############
+
+	Publications search
+
+Search
+		by criteria
+		select records by criteria						[Publications]
+
+
+#############
+
+	Records modification
+
+#############
+
+		Suggestions
+
+New suggestion
+		request is (to_pid = null, infos@)
+			or
+		request is (to_pid = pid, infos@, mask = all)
+*		check if not already exists						[Suggestions]
+	success:
+*		generate sid									[Suggestions]
+*		add infos@										[Suggestions]
+		set to_pid as null								[Suggestions]
+*		set by_uid as self								[Suggestions]
+
+Change suggestion
+		by pid
+		request is (to_pid = pid, infos@ ({null in column to keep old} ?))
+			or
+		request is (to_pid = pid, infos@ (affected columns), mask (affected columns))
+*		check if not already exists						[Suggestions]
+	*	check if exists									[Publications]
+	success:
+*		generate sid									[Suggestions]
+*		add infos@										[Suggestions]
+	*	set to_pid as pid								[Suggestions]
+*		set by_uid as self								[Suggestions]
+
+Delete suggestion
+		by pid
+		request is (pid, infos = null)
+			or
+		request is (to_pid = pid, mask = null)
+*		check if not already exists						[Suggestions]
+	*	check if exists									[Publications]
+	success:
+*		generate sid									[Suggestions]
+*		add infos@										[Suggestions]
+	*	set to_pid as pid								[Suggestions]
+*		set by_uid as self								[Suggestions]
+
+
+#############
+	
+		Cancelling suggestion
+	
+Cancel the suggestion
+		by sid
+		check if exists									[Suggestions]
+		check if [sid].by_uid = self or moderator (?)	[Users]
+	success:
+		remove record (delayed ?)						[Suggestions]
+
+
+#############
+
+		Suggestions accepting / rejecting
+
+Accept suggestion
+		by sid
+*		check if exists									[Suggestions]
+		check if [sid].by_uid is valid					[Users, Suggestions]
+	success:
+		try to apply suggestion							[Publications]
+	success:
+		delete record / mark as done					[Suggestions]
+
+Reject suggestion
+		by sid
+*		check if exists									[Suggestions]
+	success:
+		delete record / mark as rejected				[Suggestions]
+
+
+#############
+
+		Applying suggestions
+
+New
+		request is (to_pid = null, infos@)
+*		check if exists									[Suggestions]
+*		check if not already exists						[Publications]
+	success:
+		generate pid									[Publications]
+		add infos@										[Publications]
+		(?) set by_uid as [sid].by_uid					[Publications, Suggestions]
+
+Change
+		request is (to_pid, infos@ ({null in column to keep old} ?))
+*		check if exists									[Suggestions]
+*		check if exists									[Publications]
+	success:
+		apply infos@									[Suggestions]
+		(?) set by_uid as [sid].by_uid (multivalue ?)	[Suggestions]
+
+Delete
+		request is (to_pid, infos = null)
+*		check if exists									[Suggestions]
+*		check if exists									[Publications]
+	success:
+		remove record (delayed ?)						[Publications]
+
