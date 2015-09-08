@@ -1,0 +1,41 @@
+		Tables:
+> 'Publications'
+> 'Authors*'
+> 'Users'
+> 'Suggestions'
+
+
+#############
+
+		Tables:
+
+	'Publications' table:
+> pid
+> infos (
+	> authors / authors_aids*
+	> url
+	> @
+)
+> (?) by_uid
+
+
+	'Authors*' table:
+> aid
+> infos@
+
+
+	'Users' table:
+> uid
+> role {suggester / moderator / administrator}
+> infos@
+
+
+	'Suggestions' table:
+> sid
+> infos {publication_infos}
+> (?) mask
+> to_pid
+> by_uid
+
+
+P.S. @ = ...
