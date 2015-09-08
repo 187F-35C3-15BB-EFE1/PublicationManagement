@@ -1,0 +1,30 @@
+	User rights: (rights are inherited from top to bottom)
+> (reader) null (read)
+> suggester (suggest)
+> moderator (accept / reject suggestion, add / remove / change publication records)
+> administrator (elevate / reduce rights)
+
+
+#############
+
+	User rights per tables:
+
+	null
+Publications		R	-
+Suggestions			?	-		search unconfirmed
+Users				*	*		registration
+
+	suggester
+Publications		R	-
+Suggestions			R	W
+Users				R	-
+
+	moderator
+Publications		R	W
+Suggestions			R	W
+Users				R	-
+
+	administrator
+Publications		R	W
+Suggestions			R	W
+Users				R	W
