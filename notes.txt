@@ -1,0 +1,34 @@
+	Related
+> Author
+> Themes
+> Year
+
+	Ranking
+> Views
+> Author publications count
+
+##################
+
+Python + Django
+
+##################
+
+GitHub - public (? private)
+@turuslan
+@EiffelBoy
+
+##################
+
+1) hello world page
+
+2) /math?a=1&b=5&op=add(sub,mul,div)
+before saturday
+
+3) client-server ajax calculator
+before next saturday
+
+*) Python + PostgreSQL
+
+##################
+
+thursday - structure overview
