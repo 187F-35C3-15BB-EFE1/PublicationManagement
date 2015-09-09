@@ -1,0 +1,35 @@
+.../search?q=Cats
+
+[table - title, author]
+
+(Publications)
+Cat1
+Cat2
+
+10 per page
+
+####
+
+/publication?pid=1234
+
+author Meyer
+title Eiffel
+
+####
+
+/add?author=Meyer&title=Eiffel
+
+> OK, PID=%
+
+> Already exists
+
+####
+
+/delete?pid=1234
+
+> OK
+> not found
+
+####
+
+deadline - thrusday, 10.09.15, 12:00
