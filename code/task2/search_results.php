@@ -6,6 +6,30 @@ require 'sql.utils.php';
 function html ($s) {
 	return htmlspecialchars ($s);
 }
+function pageLoad () {
+	global $page, $pageBegin, $pageEnd, $tableRow;
+	$page = file_get_contents ("search_results.html");
+	
+	$p = strpos ($page, "[[");
+	$pageBegin = substr ($page, 0, $p);
+	$page = substr ($page, $p + 2);
+	
+	$p = strpos ($page, "]]");
+	$pageEnd = substr ($page, $p + 2);
+	$tableRow = substr ($page, 0, $p);
+}
+function pageBegin () {
+	global $pageBegin;
+	echo $pageBegin;
+}
+function injectTableRow ($row) {
+	global $tableRow;
+	return str_replace ("{{title}}", $row[1], str_replace ("{{author}}", $row[2], $tableRow));
+}
+function endPage () {
+	global $pageEnd;
+	echo $pageEnd;
+}
 
 function sql_query ($q) {
 	$highlight = true;
@@ -55,11 +79,11 @@ if (!isset ($_GET["q"])) {
 $get_q = strtolower ($_GET["q"]);
 $rows = sql_query ($get_q);
 
-echo count ($rows)." results<br>";
-
+pageLoad ();
+pageBegin ();
 for ($i = 0; $i < count ($rows); $i ++) {
-	$row = $rows[$i];
-	echo "$i) $row[1] - $row[2] [$row[0]]<br>";
+	echo injectTableRow ($rows[$i]);
 }
+pageEnd ();
 
 ?>
