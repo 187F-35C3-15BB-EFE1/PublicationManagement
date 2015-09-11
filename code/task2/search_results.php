@@ -31,7 +31,11 @@ function pageBegin () {
 // returns filled template of table row
 function injectTableRow ($row) {
 	global $tableRow;
-	return str_replace ("{{title}}", $row[1], str_replace ("{{author}}", $row[2], $tableRow));
+	return str_replace ("{{title}}", $row[1],
+		str_replace ("{{author}}", $row[2],
+			str_replace ("{{link}}", $row[3], $tableRow)
+		)
+	);
 }
 
 // prints page content after the table rows
