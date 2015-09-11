@@ -1,5 +1,7 @@
 <?php
 
+// opens database connection
+// returns reference to database connection
 function sql_begin () {
 	$host = "localhost";
 	$user = "DMD";
@@ -11,6 +13,7 @@ function sql_begin () {
 	return $con ? $con : false;
 }
 
+// closes database connection referred by `$con`
 function sql_end ($con) {
 	if ($con) {
 		pg_close ($con);
