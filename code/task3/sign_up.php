@@ -16,8 +16,8 @@ function db_add_user ($email, $password) {
 	if ($rs = pg_query ($con, $query)) {
 		$ret = true;
 	} else {
-		/ echo "<hr>".html (pg_last_error ())."<br>";
-		 echo html ("Cannot execute query: $query")."<hr>";
+		echo "<hr>".html (pg_last_error ())."<br>";
+		echo html ("Cannot execute query: $query")."<hr>";
 		$ret = false;
 	}
 	return $ret;
