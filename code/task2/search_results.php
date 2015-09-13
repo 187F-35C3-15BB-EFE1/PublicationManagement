@@ -44,6 +44,21 @@ function endPage () {
 	echo $pageEnd;
 }
 
+function highlight ($src, $key) {
+	$key_len = strlen ($key);
+	$low = strtolower ($src);
+	$new = "";
+	$p = 0;
+	$op = $p;
+	while (($p = strpos ($low, $key, $op)) !== false) {
+		$new .= substr ($src, $op, $p - $op)."<mark>".html (substr ($src, $p, $key_len))."</mark>";
+		$p += $key_len;
+		$op = $p;
+	}
+	$new .= substr ($src, $op, strlen ($src) - $op);
+	return $new;
+}
+
 // makes the query
 // returns array of rows
 function sql_query ($q) {
@@ -68,14 +83,48 @@ function sql_query ($q) {
 			$qs = explode (" ", $q);
 			// remove duplicates
 			$qs = array_unique ($qs);
+			$qwxas = array ();
+			$qwxts = array ();
 			for ($i = 0; $i < count ($qs); $i ++) {
 				$qw = $qs[$i];
-				$qws[] = $qw;
-				$qs[$i] = "LOWER (Title) LIKE '%$qw%' OR LOWER (Author) LIKE '%$qw%'";
+				$qwx = explode (":", $qw);
+				if (count ($qwx) != 2) {
+					if (strpos ($qw, ":") === false) {
+						$qws[] = $qw;
+					}
+					// else FALSE, ignore keyword of undefined format
+				} else {
+					$qw = $qwx[1];
+					switch ($qwx[0]) {
+					case "author":
+						$qwxas[] = $qwx[1];
+						break;
+					case "title":
+						$qwxts[] = $qwx[1];
+						break;
+					// else FALSE, ignore keyword of undefined format
+					}
+				}
 			}
-			$query .= implode (" OR ", $qs);
+			// $qs[$i] = "LOWER (Author) LIKE '%$qw%'";
+			// $qs[$i] = "LOWER (Title) LIKE '%$qw%' OR LOWER (Author) LIKE '%$qw%'";
+			$conditions = array ();
+			for ($i = 0; $i < count ($qws); $i ++) {
+				$qw = $qws[$i];
+				$conditions[] = "(LOWER (Title) LIKE '%$qw%' OR LOWER (Author) LIKE '%$qw%')";
+			}
+			for ($i = 0; $i < count ($qwxas); $i ++) {
+				$qw = $qwxas[$i];
+				$conditions[] = "LOWER (Author) LIKE '%$qw%'";
+			}
+			for ($i = 0; $i < count ($qwxts); $i ++) {
+				$qw = $qwxts[$i];
+				$conditions[] = "LOWER (Title) LIKE '%$qw%'";
+			}
+			$query .= implode (" AND ", $conditions);
 		}
 		$query .= ";";
+		echo "<hr>$query<hr>";
 
 		$rows = false;
 		// try to perform query
@@ -85,24 +134,19 @@ function sql_query ($q) {
 			while ($row = pg_fetch_row ($rs)) {
 				// highlight occurences
 				if ($highlight && 0 < strlen ($q)) {
-					// for each keyword
+					// for each single keyword
 					for ($k = 0; $k < count ($qws); $k ++) {
-						$qw = $qws[$k];
-						$qw_len = strlen ($qw);
 						for ($j = 1; $j < 3; $j ++) {
-							$src = $row[$j];
-							$low = strtolower ($src);
-							$new = "";
-							$p = 0;
-							$op = $p;
-							while (($p = strpos ($low, $qw, $op)) !== false) {
-								$new .= substr ($src, $op, $p - $op)."<mark>".html (substr ($src, $p, $qw_len))."</mark>";
-								$p += $qw_len;
-								$op = $p;
-							}
-							$new .= substr ($src, $op, strlen ($src) - $op);
-							$row[$j] = $new;
+							$row[$j] = highlight ($row[$j], $qws[$k]);
 						}
+					}
+					// for each title keyword
+					for ($k = 0; $k < count ($qwxts); $k ++) {
+						$row[1] = highlight ($row[1], $qwxts[$k]);
+					}
+					// for each author keyword
+					for ($k = 0; $k < count ($qwxas); $k ++) {
+						$row[2] = highlight ($row[2], $qwxas[$k]);
 					}
 				}
 				// add `row` to `rows` array
