@@ -1,0 +1,39 @@
+			Users		Pub's		Sug's
+											
+Search		sys			any			Mod			
+	
+Read		sys			any			Mod				
+
+Add			sys			Mod			Sug			
+
+Delete		adm			Mod			Sug				
+
+Change		adm			Mod			Mod				
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
