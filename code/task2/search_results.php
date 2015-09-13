@@ -128,7 +128,7 @@ if (!isset ($_GET["q"])) {
 $get_q = strtolower ($_GET["q"]);
 
 // remove whitespace duplicates
-$get_q = preg_replace ("/\W+/", " ", $get_q);
+$get_q = preg_replace ("/\s+/", " ", $get_q);
 // remove whitespace at the begin and the end
 $get_q = trim ($get_q);
 
