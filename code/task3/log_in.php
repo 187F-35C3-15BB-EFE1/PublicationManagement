@@ -33,7 +33,7 @@ function user_cookie ($user) {
 }
 
 $error_message = '';
-$email = $_GET['email'];
+$email = strtolower ($_GET['email']);
 $password = $_GET['password'];
 $redirect = false;
 if (isset ($_GET['email']) && isset ($_GET['password'])
