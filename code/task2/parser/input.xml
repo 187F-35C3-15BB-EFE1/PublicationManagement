@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link href="http://arxiv.org/api/query?search_query%3Dx%26id_list%3D%26start%3D20%26max_results%3D20" rel="self" type="application/atom+xml"/>
+  <title type="html">ArXiv Query: search_query=x&amp;id_list=&amp;start=20&amp;max_results=20</title>
+  <id>http://arxiv.org/api/E72GBGJeVZl6hfxQg7+faAsGioY</id>
+  <updated>2015-09-09T00:00:00-04:00</updated>
+  <opensearch:totalResults xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">59067</opensearch:totalResults>
+  <opensearch:startIndex xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">20</opensearch:startIndex>
+  <opensearch:itemsPerPage xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">20</opensearch:itemsPerPage>
+  <entry>
+    <id>http://arxiv.org/abs/math/0404421v1</id>
+    <updated>2004-04-22T20:21:41Z</updated>
+    <published>2004-04-22T20:21:41Z</published>
+    <title>On squares of spaces and Fsigma-sets</title>
+    <summary>  We show that the continuum hypothesis implies there exists a Lindelof space X
+such that X x X is the union of two metrizable subspaces but X is not
+metrizable. This gives a consistent solution to a problem of Balogh, Gruenhage,
+and Tkachuk. The main lemma is that assuming the continuum hypothesis there
+exist disjoint sets of reals X and Y such that X is Borel concentrated on Y,
+(i.e., for any Borel set B if Y is contained in B then X-B is countable,) but
+(X x X - diagonal) is relatively Fsigma in (X x X) U (Y x Y).
+</summary>
+    <author>
+      <name>Arnold W. Miller</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">6 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0404421v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0404421v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="03E35 54B10 54E35" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0504475v1</id>
+    <updated>2005-04-22T20:26:00Z</updated>
+    <published>2005-04-22T20:26:00Z</published>
+    <title>Generators and defining relations for the ring of differential operators
+  on a smooth affine algebraic variety</title>
+    <summary>  For the ring of differential operators on a smooth affine algebraic variety
+$X$ over a field of characteristic zero a finite set of algebra generators and
+a finite set of defining relations are found explicitly. As a consequence, a
+finite set of generators and a finite set of defining relations are given for
+the module $\Der_K(\OO (X))$ of derivations on the algebra $\OO (X)$ of regular
+functions on the variety $X$. For the variety $X$ which is not necessarily
+smooth, a set of natural derivations ${\rm der}_K(\OO (X))$ of the algebra $\OO
+(X)$ and a ring $\gD (\OO (X))$ of natural differential operators on $\OO (X)$
+are introduced. The algebra $\gD (\OO (X))$ is a Noetherian algebra of
+Gelfand-Kirillov dimension $2\dim (X)$. When $X$ is smooth then ${\rm
+der}_K(\OO (X))=\Der_K(\OO (X))$ and $\gD (\OO (X))=\CD (\OO (X))$. A criterion
+of smoothness of $X$ is given when $X$ is irreducible ($X$ is smooth iff $\gD
+(\OO (X))$ is a simple algebra iff $\OO (X)$ is a simple $\gD (\OO
+(X))$-module). The same results are true for regular algebras of essentially
+finite type. For a singular irreducible affine algebraic variety $X$, in
+general, the algebra of differential operators $\CD (\OO (X))$ needs not be
+finitely generated nor (left or right) Noetherian, it is proved that each term
+$\CD (\OO (X))_i$ of the order filtration $\CD (\OO (X))=\cup_{i\geq 0}\CD (\OO
+(X))_i$ is a finitely generated left $\OO (X)$-module.
+</summary>
+    <author>
+      <name>V. V. Bavula</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">29 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0504475v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0504475v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="13N10, 16S32, 15S15, 13N15, 14J17" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1210.6521v3</id>
+    <updated>2014-01-17T14:50:33Z</updated>
+    <published>2012-10-21T08:04:56Z</published>
+    <title>Some generalizations and unifications of $C_{K}(X)$, $C_ψ(X)$ and
+  $C_{\infty}(X)$</title>
+    <summary>  Let $\cal{P}$ be an open filter base for a filter $\cal{F}$ on $X$. We denote
+by $C^{\cal{P}}(X)$ ($C_{\infty\cal{P}}(X)$) the set of all functions $f\in
+C(X)$ where $Z(f)$ ($\{x: |f(x)|&lt; \frac{1}{n}\})$ contains an element of
+$\cal{P}$. First, we observe that every proper subrings in the sense of
+Acharyya and Ghosh (Topology Proc. 2010) has such form and vice versa. After
+wards, we generalize some well known theorems about $C_{K}(X), C_{\psi}(X)$ and
+$C_{\infty}(X)$ for $C^{\cal{P}}(X)$ and $C_{\infty\cal{P}}(X)$. We observe
+that $C_{\infty\cal{P}}(X)$ may not be an ideal of $C(X)$. It is shown that
+$C_{\infty\cal{P}}(X)$ is an ideal of $C(X)$ and for each $F\in\cal{F}$,
+$X\setminus \overline{F}$ is bounded \ifif the set of non-cluster points of the
+filter $\cal{F}$ is bounded. By this result, we investigate topological spaces
+for which $C_{\infty\cal{P}}(X)$ is an ideal of $C(X)$ whenever
+$\cal{P}$=$\{A\subsetneq X$: $A$ is open and $X\setminus A$ is bounded $\}$
+(resp., $\cal{P}$=$\{A\subsetneq X$: $X\setminus A$ is finite $\}$). Moreover,
+we prove that $C^{\cal{P}}(X)$ is an essential (resp., free) ideal \ifif the
+set $\{V:$ $V$ is open and $X\setminus V\in\mathcal{F}\}$ is a $\pi$-base for
+$X$ (resp., $\mathcal{F}$ has no cluster point). Finally, the filter $\cal{F}$
+for which $C_{\infty\cal{P}}(X)$ is a regular ring (resp., $z$-ideal) is
+characterized.
+</summary>
+    <author>
+      <name>A. Taherifar</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">13 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/1210.6521v3" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/1210.6521v3" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="54C40" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/9607215v1</id>
+    <updated>1996-07-08T00:00:00Z</updated>
+    <published>1996-07-08T00:00:00Z</published>
+    <title>The algebraic dimension of compact complex threefolds with vanishing
+  second Betti number</title>
+    <summary>  We investigate compact complex manifolds of dimension three and second Betti
+number $b_2(X) = 0$. We are interested in the algebraic dimension $a(X)$,
+which is by definition the transcendence degree of the field of meromorphic
+functions over the field of complex numbers. The topological Euler
+characteristic $\chi_{\mathrm{ top}}(X) $ equals the third Chern class
+$c_3(X)$ by a theorem of Hopf. Our main result is that, if $X$ is a compact
+3-dimensional complex manifold with $b_2(X) = 0$ and $a(X) &gt; 0$, then $c_3(X)
+= \chi_{\rm top}(X) = 0$, that is, we either have $b_1(X) = 0, \ b_3(X) = 2$
+or $b_1(X) = 1, \ b_3(X) = 0.$
+</summary>
+    <author>
+      <name>Frédéric Campana</name>
+    </author>
+    <author>
+      <name>Jean-Pierre Demailly</name>
+    </author>
+    <author>
+      <name>Thomas Peternell</name>
+    </author>
+    <link href="http://arxiv.org/abs/math/9607215v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/9607215v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/9911155v1</id>
+    <updated>1999-11-20T02:25:12Z</updated>
+    <published>1999-11-20T02:25:12Z</published>
+    <title>Projective space of a C*-module</title>
+    <summary>  Let X be a right Hilbert C*-module over A. We study the geometry and the
+topology of the projective space P(X) of X, consisting of the orthocomplemented
+submodules of X which are generated by a single element. We also study the
+geometry of the p-sphere S_p(X) and the natural fibration S_p(X) \to P(X),
+where S_p(X)={x\in X: &lt;x,x&gt;=p}, for p in A a projection. The projective space
+and the p-sphere are shown to be homogeneous differentiable spaces of the
+unitary group of the algebra L_A(X) of adjointable operators of X. The homotopy
+theory of these spaces is examined.
+</summary>
+    <author>
+      <name>E. Andruchow</name>
+      <arxiv:affiliation xmlns:arxiv="http://arxiv.org/schemas/atom">ICI-UNGS, Argentina</arxiv:affiliation>
+    </author>
+    <author>
+      <name>G. Corach</name>
+      <arxiv:affiliation xmlns:arxiv="http://arxiv.org/schemas/atom">UBA and IAM, Argentina</arxiv:affiliation>
+    </author>
+    <author>
+      <name>D. Stojanoff</name>
+      <arxiv:affiliation xmlns:arxiv="http://arxiv.org/schemas/atom">UNLP, Argentina</arxiv:affiliation>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">22 pages, AMSTeX</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/9911155v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/9911155v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="46L05; 58B20" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0312151v1</id>
+    <updated>2003-12-08T05:28:24Z</updated>
+    <published>2003-12-08T05:28:24Z</published>
+    <title>A Remark on Soliton Equation of Mean Curvature Flow</title>
+    <summary>  In this short note, we consider self-similar immersions $F: \mathbb{R}^n \to
+\mathbb{R}^{n+k}$ of the Graphic Mean Curvature Flow of higher co-dimension. We
+show that the following is true: Let $F(x) = (x,f(x)), x \in \mathbb{R}^{n}$ be
+a graph solution to the soliton equation $$ \bar{H}(x) + F^{\bot}(x) = 0. $$
+Assume $\sup_{\mathbb{R}^{n}}|Df(x)| \le C_{0} &lt; + \infty$. Then there exists a
+unique smooth function $f_{\infty}: \mathbb{R}^{n}\to \mathbb{R}^k$ such that
+$$ f_{\infty}(x) = \lim_{\lambda \to \infty}f_{\lambda}(x) $$ and $$
+f_{\infty}(r x)=r f_{\infty}(x) $$ for any real number $r\not= 0$, where $$
+f_{\lambda}(x) = \lambda^{-1}f(\lambda x). $$
+</summary>
+    <author>
+      <name>L. Ma</name>
+    </author>
+    <author>
+      <name>Y. Yang</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">6 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0312151v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0312151v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="53C44,53C42" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0402459v1</id>
+    <updated>2004-02-27T18:23:25Z</updated>
+    <published>2004-02-27T18:23:25Z</published>
+    <title>Symmetry and Specializability in the continued fraction expansions of
+  some infinite products</title>
+    <summary>  Let $f(x) \in \mathbb{Z}[x]$. Set $f_{0}(x) = x$ and, for $n \geq 1$, define
+$f_{n}(x)$ $=$ $f(f_{n-1}(x))$. We describe several infinite families of
+polynomials for which the infinite product \prod_{n=0}^{\infty} (1 +
+\frac{1}{f_{n}(x)}) has a \emph{specializable} continued fraction expansion of
+the form S_{\infty} = [1;a_{1}(x), a_{2}(x), a_{3}(x), ... ], where $a_{i}(x)
+\in \mathbb{Z}[x]$, for $i \geq 1$. When the infinite product and the continued
+fraction are \emph{specialized} by letting $x$ take integral values, we get
+infinite classes of real numbers whose regular continued fraction expansion is
+predictable. We also show that, under some simple conditions, all the real
+numbers produced by this specialization are transcendental.
+</summary>
+    <author>
+      <name>James Mc Laughlin</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">24 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0402459v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0402459v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="11A55; 11J81" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0401335v1</id>
+    <updated>2004-01-24T09:41:49Z</updated>
+    <published>2004-01-24T09:41:49Z</published>
+    <title>L'Application Canonique $J:H^2(X) \otimes H^2(X)-&gt;H^1(X\otimes X)$ n'est
+  pas Surjective en Général</title>
+    <summary>  We introduce the $H^1$-projective property, and use it to construct a Banach
+space $X$ such that the natural map
+  $J:H^2(X)\otimes H^2(X) -&gt; H^1(X\otimes X)$ is not onto.
+</summary>
+    <author>
+      <name>Omran Kouba</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">9 pages, French with abridged english version</arxiv:comment>
+    <arxiv:journal_ref xmlns:arxiv="http://arxiv.org/schemas/atom">C.R. Acad. Sci. Paris t.307, Serie I, (1988), 949-953</arxiv:journal_ref>
+    <link href="http://arxiv.org/abs/math/0401335v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0401335v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="46M05;47A56;47A68" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0412288v1</id>
+    <updated>2004-12-14T21:08:29Z</updated>
+    <published>2004-12-14T21:08:29Z</published>
+    <title>On the random nature of (prime) number distribution</title>
+    <summary>  Let pi(x) denote the number of primes smaller or equal to x. We compare
+sqrt{pi}(x) with sqrt{R}(x) and sqrt{li}(x), where R(x) and li(x) are the
+Riemann function and the logarithmic integral, respectively. We show a
+regularity in the distribution of the natural numbers in terms of a phase
+related to sqrt{pi}-sqrt{R} and indicate how li(x) can cross pi(x) for the
+first time.
+</summary>
+    <author>
+      <name>Erika Alvarez</name>
+    </author>
+    <author>
+      <name>Jean Pestieau</name>
+    </author>
+    <link href="http://arxiv.org/abs/math/0412288v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0412288v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="11A41" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0709.4018v1</id>
+    <updated>2007-09-25T19:28:36Z</updated>
+    <published>2007-09-25T19:28:36Z</published>
+    <title>On the Lusternik-Schnirelmann category of spaces with 2-dimensional
+  fundamental group</title>
+    <summary>  The following inequality
+  \cat X\le \cat Y+\lceil\frac{hd(X)-r}{r+1}\rceil
+  holds for every locally trivial fibration between $ANE$ spaces $f:X\to Y$
+which admits a section and has the $r$-connected fiber where $hd(X)$ is the
+homotopical dimension of $X$. We apply this inequality to prove that
+  \cat X\le \lceil\frac{\dim X-1}{2}\rceil+cd(\pi_1(X))
+  for every complex $X$ with $cd(\pi_1(X))\le 2$.
+</summary>
+    <author>
+      <name>A. Dranishnikov</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">8 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/0709.4018v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/0709.4018v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="55M30" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0705.2109v1</id>
+    <updated>2007-05-15T10:12:03Z</updated>
+    <published>2007-05-15T10:12:03Z</published>
+    <title>Discontinuity and Involutions on Countable Sets</title>
+    <summary>  For any infinite subset $X$ of the rationals and a subset $F \subseteq X$
+which has no isolated points in $X$ we construct a function $f: X \to X$ such
+that $f(f(x))=x$ for each $x\in X$ and $F $ is the set of discontinuity points
+of $f$.
+</summary>
+    <author>
+      <name>Sung Soo Kim</name>
+    </author>
+    <author>
+      <name>Szymon Plewik</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">The paper was published</arxiv:comment>
+    <arxiv:journal_ref xmlns:arxiv="http://arxiv.org/schemas/atom">Annales Mathematics Silesianae 17 (2003), 7 - 8</arxiv:journal_ref>
+    <link href="http://arxiv.org/abs/0705.2109v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/0705.2109v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="26A15" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0609091v1</id>
+    <updated>2006-09-04T07:13:48Z</updated>
+    <published>2006-09-04T07:13:48Z</published>
+    <title>Resolvability of spaces having small spread or extent</title>
+    <summary>  In a recent paper O. Pavlov proved the following two interesting
+resolvability results:
+  (1) If a space $X$ satisfies $\Delta(X) &gt; \ps(X)$ then $X$ is maximally
+resolvable.
+  (2) If a $T_3$-space $X$ satisfies $\Delta(X) &gt; \pe(X)$ then $X$ is
+$\omega$-resolvable.
+  Here $\ps(X)$ ($\pe(X)$) denotes the smallest successor cardinal such that
+$X$ has no discrete (closed discrete) subset of that size and $\Delta(X)$ is
+the smallest cardinality of a non-empty open set in $X$. In this note we
+improve (1) by showing that $\Delta(X) &gt;$ $\ps(X)$ can be relaxed to $\Delta(X)
+\ge$ $\ps(X)$. In particular, if $X$ is a space of countable spread with
+$\Delta(X) &gt; \omega$ then $X$ is maximally resolvable.
+  The question if an analogous improvement of (2) is valid remains open, but we
+present a proof of (2) that is simpler than Pavlov's.
+</summary>
+    <author>
+      <name>Istvan Juhasz</name>
+    </author>
+    <author>
+      <name>Lajos Soukup</name>
+    </author>
+    <author>
+      <name>Zoltan Szentmiklossy</name>
+    </author>
+    <link href="http://arxiv.org/abs/math/0609091v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0609091v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.LO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="54A35 (Primary) 03E35, 54A25 (Secondary)" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1103.6136v1</id>
+    <updated>2011-03-31T10:17:12Z</updated>
+    <published>2011-03-31T10:17:12Z</published>
+    <title>A Remark on the Assumptions of Bayes' Theorem</title>
+    <summary>  We formulate simple equivalent conditions for the validity of Bayes' formula
+for conditional densities. We show that for any random variables X and Y (with
+values in arbitrary measurable spaces), the following are equivalent:
+  1. X and Y have a joint density w.r.t. a product measure \mu x \nu,
+  2. P_{X,Y} &lt;&lt; P_X x P_Y, (here P_{.} denotes the distribution of {.})
+  3. X has a conditional density p(x | y) w.r.t. a sigma-finite measure \mu,
+  4. X has a conditional distribution P_{X|Y} such that P_{X|y} &lt;&lt; P_X for all
+y,
+  5. X has a conditional distribution P_{X|Y} and a marginal density p(x)
+w.r.t. a measure \mu such that P_{X|y} &lt;&lt; \mu for all y.
+  Furthermore, given random variables X and Y with a conditional density p(y |
+x) w.r.t. \nu and a marginal density p(x) w.r.t. \mu, we show that Bayes'
+formula p(x | y) = p(y | x)p(x) / \int p(y | x)p(x)d\mu(x) yields a conditional
+density p(x | y) w.r.t. \mu if and only if X and Y satisfy the above
+conditions. Counterexamples illustrating the nontriviality of the results are
+given, and implications for sequential adaptive estimation are considered.
+</summary>
+    <author>
+      <name>Janne V. Kujala</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">10 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/1103.6136v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/1103.6136v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.TH" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="60A05, 60A10" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0608686v1</id>
+    <updated>2006-08-28T13:04:37Z</updated>
+    <published>2006-08-28T13:04:37Z</published>
+    <title>Sublinear Higson corona and Lipschitz extensions</title>
+    <summary>  The purpose of the paper is to characterize the dimension of sublinear Higson
+corona $\nu_L(X)$ of $X$ in terms of Lipschitz extensions of functions:
+  Theorem: Suppose $(X,d)$ is a proper metric space. The dimension of the
+sublinear Higson corona $\nu_L(X)$ of $X$ is the smallest integer $m\ge 0$ with
+the following property: Any norm-preserving asymptotically Lipschitz function
+$f'\colon A\to \R^{m+1}$, $A\subset X$, extends to a norm-preserving
+asymptotically Lipschitz function $g'\colon X\to \R^{m+1}$.
+  One should compare it to the result of Dranishnikov \cite{Dr1} who
+characterized the dimension of the Higson corona $\nu(X)$ of $X$ is the
+smallest integer $n\ge 0$ such that $\R^{n+1}$ is an absolute extensor of $X$
+in the asymptotic category $\AAA$ (that means any proper asymptotically
+Lipschitz function $f\colon A\to \R^{n+1}$, $A$ closed in $X$, extends to a
+proper asymptotically Lipschitz function $f'\colon X\to \R^{n+1}$). \par
+ In \cite{Dr1} Dranishnikov introduced the category $\tilde \AAA$ whose objects
+are pointed proper metric spaces $X$ and morphisms are asymptotically Lipschitz
+functions $f\colon X\to Y$ such that there are constants $b,c &gt; 0$ satisfying
+ $|f(x)|\ge c\cdot |x|-b$ for all $x\in X$.
+ We show $\dim(\nu_L(X))\leq n$ if and only if $\R^{n+1}$ is an absolute
+extensor of $X$ in the category $\tilde\AAA$. \par As an application we reprove
+the following result of Dranishnikov and Smith \cite{DRS}:
+  Theorem: Suppose $(X,d)$ is a proper metric space of finite asymptotic
+Assouad-Nagata dimension $\asdim_{AN}(X)$. If $X$ is cocompact and connected,
+then $\asdim_{AN}(X)$ equals the dimension of the sublinear Higson corona
+$\nu_L(X)$ of $X$.
+</summary>
+    <author>
+      <name>M. Cencelj</name>
+    </author>
+    <author>
+      <name>J. Dydak</name>
+    </author>
+    <author>
+      <name>J. Smrekar</name>
+    </author>
+    <author>
+      <name>A. Vavpetic</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">13 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0608686v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0608686v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GT" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1504.01785v1</id>
+    <updated>2015-04-08T00:03:43Z</updated>
+    <published>2015-04-08T00:03:43Z</published>
+    <title>Cardinalities of weakly Lindelöf spaces with regular
+  $G_κ$-diagonals</title>
+    <summary>  For a Urysohn space $X$ we define the \emph{regular diagonal degree}
+$\overline{\Delta}(X)$ of $X$ to be the minimal infinite cardinal $\kappa$ such
+that $X$ has a regular $G_\kappa$-diagonal i.e. there is a family
+$(U_\eta:\eta&lt;\kappa)$ of open sets in $X^2$ such that $\{(x,x)\in X^2:x\in X\}
+= \cap_{\eta&lt;\kappa} \overline{U}_\eta$.
+  In this paper we show that if $X$ is a Urysohn space then: (1) $|X|\leq
+2^{wL(X)\cdot\overline{\Delta}(X)}$; (2) $|X|\le
+wL(X)^{\overline{\Delta}(X)\cdot\chi(X)}$; and (3) $|X|\le
+aL(X)^{\overline{\Delta}(X)}$.
+  It follows from (1) that every weakly Lindel\"of space with a regular
+$G_\delta$-diagonal has cardinality at most $2^\omega$. This generalizes
+Buzyakova's result that the cardinality of a ccc-space with a regular
+$G_\delta$-diagonal does not exceed $2^\omega$. It also follows that $|X|\leq
+2^{\chi(X)\cdot wL(X)\cdot\overline{\Delta}(X)}$; hence Bell, Ginsburg and
+Woods inequality $|X|\le 2^{\chi(X)wL(X)}$, which is known to be true for
+normal $T_1$-spaces, is true also for a large class of Urysohn spaces that
+includes all spaces with regular $G_\delta$-diagonals.
+  Inequality (2) implies that when $X$ is a space with a regular
+$G_\delta$-diagonal then $|X|\le wL(X)^{\chi(X)}$. This improves significantly
+Bell, Ginsburg and Woods inequality for the class of normal spaces with regular
+$G_\delta$-diagonals. In particular (2) shows that the cardinality of every
+first countable space with a regular $G_\delta$-diagonal does not exceed
+$wL(X)^\omega$.
+  For the class of spaces with regular $G_\delta$-diagonals (3) improves Bella
+and Cammaroto inequality $|X|\le 2^{\chi(X)\cdot aL(X)}$, which is valid for
+all Urysohn spaces. Also, it follows from (3) that the cardinality of every
+space with a regular $G_\delta$-diagonal does not exceed $aL(X)^\omega$.
+</summary>
+    <author>
+      <name>Ivan S. Gotchev</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">13 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/1504.01785v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/1504.01785v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="54A25 (Primary), 54D20 (Secondary)" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1503.04480v3</id>
+    <updated>2015-06-15T08:28:29Z</updated>
+    <published>2015-03-15T22:13:56Z</published>
+    <title>Verbal covering properties of topological spaces</title>
+    <summary>  For any topological space $X$ we study the relation between the universal
+uniformity $\mathcal U_X$, the universal quasi-uniformity $q\mathcal U_X$ and
+the universal pre-uniformity $p\mathcal U_X$ on $X$. For a pre-uniformity
+$\mathcal U$ on a set $X$ and a word $v$ in the two-letter alphabet $\{+,-\}$
+we define the verbal power $\mathcal U^v$ of $\mathcal U$ and study its
+boundedness numbers $\ell(\mathcal U^v)$ and $\bar \ell(\mathcal U^v)$. The
+boundedness numbers of the (Boolean operations over) the verbal powers of the
+canonical pre-uniformities $p\mathcal U_X$, $q\mathcal U_X$ and $\mathcal U_X$
+yield new cardinal characteristics $\ell^v(X)$, $\bar \ell^v(X)$, $q\ell^v(X)$,
+$q\bar \ell^v(X)$, $u\ell(X)$ of a topological space $X$, which generalize all
+known cardinal topological invariants related to (star)-covering properties. We
+study the relation of the new cardinal invariants $\ell^v$, $\bar \ell^v$ to
+classical cardinal topological invariants such as Lindel\"of number $\ell$,
+density $d$, and spread $s$. The simplest new verbal cardinal invariant is the
+foredensity $\ell^-(X)$ defined for a topological space $X$ as the smallest
+cardinal $\kappa$ such that for any neighborhood assignment $(O_x)_{x\in X}$
+there is a subset $A\subset X$ of cardinality $|A|\le\kappa$ that meets each
+neighborhood $O_x$, $x\in X$. It is clear that $\ell^-(X)\le d(X)\le
+\ell^-(X)\cdot \chi(X)$. We shall prove that $\ell^-(X)=d(X)$ if
+$|X|&lt;\aleph_\omega$. On the other hand, for every singular cardinal $\kappa$
+(with $\kappa\le 2^{2^{cf(\kappa)}}$) we construct a (totally disconnected)
+$T_1$-space $X$ such that $\ell^-(X)=cf(\kappa)&lt;\kappa=|X|=d(X)$.
+</summary>
+    <author>
+      <name>Taras Banakh</name>
+    </author>
+    <author>
+      <name>Alex Ravsky</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">20 pages, many diagrams</arxiv:comment>
+    <link href="http://arxiv.org/abs/1503.04480v3" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/1503.04480v3" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="54A25, 54D20" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1301.5720v2</id>
+    <updated>2014-03-26T07:35:45Z</updated>
+    <published>2013-01-24T07:15:09Z</published>
+    <title>New further integrability cases for the Riccati equation</title>
+    <summary>  New further integrability conditions of the Riccati equation
+$dy/dx=a(x)+b(x)y+c(x)y^{2}$ are presented. The first case corresponds to fixed
+functional forms of the coefficients $a(x)$ and $c(x)$ of the Riccati equation,
+and of the function $F(x)=a(x)+[f(x)-b^{2}(x)]/4c(x)$, where $f(x)$ is an
+arbitrary function. The second integrability case is obtained for the "reduced"
+Riccati equation with $b(x)\equiv 0$. If the coefficients $a(x)$ and $c(x)$
+satisfy the condition $\pm d\sqrt{f(x)/c(x)}/dx=a(x)+f(x)$, where $f(x)$ is an
+arbitrary function, then the general solution of the "reduced" Riccati equation
+can be obtained by quadratures. The applications of the integrability condition
+of the "reduced" Riccati equation for the integration of the Schr\"odinger and
+Navier-Stokes equations are briefly discussed.
+</summary>
+    <author>
+      <name>M. K. Mak</name>
+    </author>
+    <author>
+      <name>T. Harko</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">7 pages, no figures, accepted for publication in Applied Mathematics
+  and Computation; featured in Advances in Engineering, http://advancesENG.com/</arxiv:comment>
+    <arxiv:journal_ref xmlns:arxiv="http://arxiv.org/schemas/atom">Applied Mathematics and Computation 219 (2013), pp. 7465-7471</arxiv:journal_ref>
+    <link href="http://arxiv.org/abs/1301.5720v2" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/1301.5720v2" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.MP" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/9707208v1</id>
+    <updated>1997-07-04T00:00:00Z</updated>
+    <published>1997-07-04T00:00:00Z</published>
+    <title>Diameter preserving linear bijections of $C(X)$</title>
+    <summary>  The aim of this paper is to solve a linear preserver problem on the function
+algebra $C(X)$. We show that in case $X$ is a first countable compact
+Hausdorff space, every linear bijection $\phi:C(X)\to C(X)$ having the
+property that $diam(\phi(f)(X))=diam(f(X))$ $(f\in C(X))$ is of the form \[
+\phi(f)=\tau \cdot f\circ \varphi +t(f)1 \qquad (f\in C(X)) \] where $\tau$ is
+a complex number of modulus 1, $\varphi:X\to X$ is a homeomorphism and $t$ is
+a linear functional on $C(X)$.
+</summary>
+    <author>
+      <name>M. Gyory</name>
+    </author>
+    <author>
+      <name>Lajos Molnar</name>
+    </author>
+    <link href="http://arxiv.org/abs/math/9707208v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/9707208v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="46J10, 47B38" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/9811065v1</id>
+    <updated>1998-11-10T16:04:03Z</updated>
+    <published>1998-11-10T16:04:03Z</published>
+    <title>Un théoréme de Nakai-Moishezon pour certaines classes de type (1,1)</title>
+    <summary>  Let $X$ be a smooth compact projective variety over $\mathbb C$.
+  Let $H^2(\pi_1(X),\mathbb R)^{1,1}$ be the intersection of
+$H^{1,1}(X,{\mathbb R})$ with the image of the map $H^2(\pi_1(X),{\mathbb
+R})\to H^2(X)$ induced by the classifying map $X\to B\pi_1(X)$. Let $NS(X)$ be
+the N\'eron-Severi group of $X$.
+  Let $[\omega]\in H^2(\pi_1(X),\mathbb R)^{1,1}+ NS(X)\otimes {\mathbb R}$. In
+this note, we prove that $[\omega]$ is the cohomology class of a K\"ahler
+metric if and only if for every $d$-dimensional reduced closed algebraic
+subvariety $Z\subset X$, $[\omega]^d.Z&gt;0$.
+</summary>
+    <author>
+      <name>Philippe Eyssidieux</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">13 pages, latex2e</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/9811065v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/9811065v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="32 J 25, 14 C 30" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0004163v1</id>
+    <updated>2000-04-26T11:33:33Z</updated>
+    <published>2000-04-26T11:33:33Z</published>
+    <title>On Well-behaved Unbounded Representations of *-Algebras</title>
+    <summary>  A general approach to the well-behaved unbounded *-representations of a
+*-algebra X is proposed. Let B be a normed *-algebra equipped with a left
+action |&gt; of X on B such that (x |&gt; a)^+ b=a^+(x^+ |&gt; b) for a,b\in B and x\in
+X. Then the pair (X,B) is called a compatible pair. For any continuous
+non-degenerate *-representation \rho of B there exists a closed
+*-representation \rho' of X such that \rho'(x)\rho(b)=\rho(x |&gt; b), where x\in
+X and b\in B. The *-representations \rho' are called the well-behaved
+*-representations associated with the compatible pair (X,B). A number of
+examples are developed in detail.
+</summary>
+    <author>
+      <name>Konrad Schmuedgen</name>
+    </author>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">16 pages</arxiv:comment>
+    <link href="http://arxiv.org/abs/math/0004163v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/math/0004163v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.QA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="16G30 (Primary) 47B25 (Secondary)" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+</feed>

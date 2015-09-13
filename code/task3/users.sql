@@ -1,0 +1,1 @@
+CREATE TABLE users (id SERIAL, email TEXT UNIQUE, password TEXT, role TEXT);

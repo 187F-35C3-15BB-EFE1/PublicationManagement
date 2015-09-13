@@ -1,0 +1,25 @@
+> DB
+	> SQL
+		> simple operations
+			> search
+			* users add, check
+		> ranking, related
+
+> arxiv
+
+> backend
+	> frontend interface
+		> serach_results.php?q=
+		* sign_up.php?email=&password=
+		* log_in.php?email=&password=
+		* user_info.php
+		* log_out.php
+	> logic
+		> search
+		* users add, check
+
+> frontend
+	> pages
+		> search, results (+ links)
+		* sign up, log in, user info
+	> navigation
