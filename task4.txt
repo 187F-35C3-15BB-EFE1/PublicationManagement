@@ -1,0 +1,14 @@
+add publicaion -> 
+->fields:
+1.title
+2.author
+3...
+
+suggestion list:
+accept		- 		reject
+
+add publication (index.html)
+addnewsuggestion.html -> addnewsuggestion.php;
+suggestionlist.html -> suggestioninfo.php (accept - reject);
+
+deadline:  16.09 19:00
