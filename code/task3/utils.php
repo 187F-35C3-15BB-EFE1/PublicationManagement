@@ -16,9 +16,9 @@ function page_split ($p, $ml, $mr) {
 	$ll = strlen ($ml);
 	$ir = strpos ($p, $mr, $il + $ll);
 	$lr = strlen ($mr);
-	$b = substr ($p, $il);
+	$b = substr ($p, 0, $il);
 	$c = substr ($p, $il + $ll, $ir);
 	$a = substr ($p, $ir + $lr, strlen ($p));
-	return array (b, c, a);
+	return array ($b, $c, $a);
 }
 ?>
