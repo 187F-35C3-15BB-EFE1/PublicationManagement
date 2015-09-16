@@ -1,0 +1,1 @@
+CREATE TABLE suggestions (sid SERIAL, mask TEXT, to_pid SERIAL, info_title TEXT, info_author TEXT, info_link TEXT);
