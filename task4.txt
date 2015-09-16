@@ -12,3 +12,23 @@ addnewsuggestion.html -> addnewsuggestion.php;
 suggestionlist.html -> suggestioninfo.php (accept - reject);
 
 deadline:  16.09 19:00
+
+####
+
+index.html
+	> link to add_new_suggestion.php
+	> link to suggestion_list.php
+
+add_new_suggestion.html
+	> form to add_new_suggestion.php
+
+suggestion_list.html
+	> table row [[...]] as in search_results.html
+	> link (in table row) to suggestion_info.php?sid={{sid}}
+	> link to index.html
+
+suggestion_info.html
+	> accept: link to suggestion_info.php?sid={{sid}}&action=accept
+	> reject: link to suggestion_info.php?sid={{sid}}&action=reject
+	> error message: {{error_message}}
+	> link to index.html
