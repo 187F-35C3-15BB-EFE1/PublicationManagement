@@ -3,23 +3,15 @@
 require 'utils.php';
 require 'sql.utils.php';
 
-// escapes special html characters
-function html ($s) {
-	return htmlspecialchars ($s);
-}
-
 // reads html template, parses it
 function pageLoad () {
-	global $page, $pageBegin, $pageEnd, $tableRow;
-	$page = file_get_contents ("search_results.html");
-	
-	$p = strpos ($page, "[[");
-	$pageBegin = substr ($page, 0, $p);
-	$page = substr ($page, $p + 2);
-	
-	$p = strpos ($page, "]]");
-	$pageEnd = substr ($page, $p + 2);
-	$tableRow = substr ($page, 0, $p);
+	global $pageBegin, $pageEnd, $tableRow;
+	$page = page_load ("search_results.html");
+
+	$tableRow = page_split ($page, "[[", "]]");
+	$pageBegin = $tableRow[0];
+	$pageEnd = $tableRow[2];
+	$tableRow = $tableRow[1];
 }
 
 // prints page content before the table rows
@@ -31,11 +23,11 @@ function pageBegin () {
 // returns filled template of table row
 function injectTableRow ($row) {
 	global $tableRow;
-	return str_replace ("{{title}}", $row[1],
-		str_replace ("{{author}}", $row[2],
-			str_replace ("{{link}}", $row[3], $tableRow)
-		)
-	);
+	$injected = $tableRow;
+	$injected = page_replace ($injected, "{{title}}",  ($row[1]));
+	$injected = page_replace ($injected, "{{author}}",  ($row[2]));
+	$injected = page_replace ($injected, "{{link}}",  ($row[3]));
+	return $injected;
 }
 
 // prints page content after the table rows
