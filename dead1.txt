@@ -1,0 +1,33 @@
+> ER, R model
+Nikita - 20.09
+
+> publication
+	> research area
+	> author name
+	> publication year
+	> venue (conference/journal name)
+	> title
+	> type of paper
+Nikita - 20.09
+
+	> (keyword = words)
+
+> func
+	> select, insert, delete, update
+	> search
+
+> spec
+	> related (2 methods) (author, research area)
+	> ranking (2 methods) (publication year, registration year, authors count)
+
+> import 1e6
+Ruslan - 20.09
+> parsing
+
+################3
+
+scripts
+> setup.sql
+> data.sql (import)
+
+search, ... templates
