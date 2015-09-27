@@ -1,0 +1,31 @@
+
+sql -> join to 1 file
+1 insert VALUES ..., ..., ...
+
+
+ER
+	> add parertype to publication
+	> add link to publication
+	> add password to user
+members
+schema
+setup.sql
+data.sql (all)
+
+
+monday
+	(Nikita)
+	ER 
+	members
+	schema
+	setup.sql
+
+tuesday
+	(Ruslan)
+	data.sql
+	expand &#xXX; -> char
+	arxiv_id -> link
+	sql -> join to 1 file
+	1 insert VALUES ..., ..., ...
+
+wednesday
