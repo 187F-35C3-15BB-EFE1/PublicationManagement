@@ -1,0 +1,20 @@
+Users {(UID serial (integer), 
+Role string, 
+Username string, 
+Email string, 
+Password string)}
+
+Publications{(PID serial (integer),
+Title String, primary key
+Authors String,
+Reasearch Area String,
+Paper Type String,
+Venues String,
+Publication year integer,
+Link URL)}
+
+Suggestions{(
+SID integer,
+By UID integer,
+to PID integer,
+Changes String)}

@@ -12,5 +12,3 @@ publication_year INTEGER NOT NULL,
 venue VARCHAR(255) NOT NULL,
 papertype VARCHAR(255) NOT NULL,
 arxiv_id VARCHAR(255) NOT NULL);		--????
-
---That is all for now kids!
