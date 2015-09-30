@@ -26,6 +26,7 @@ UPDATE publications SET <column> = <value> WHERE pid = <pid of publication to be
 search
 ____ > simple - lookup for given word(s) in one specific column or among all columns
 ____ + ex. SELECT ...
+____ ____ SELECT * FROM publications WHERE authors LIKE '%Dostoevsky%';
 ____ > related
 ____ ____ > get all authors of given article, for each author search all his publications
 ____ ____ > search for articles of the same year as given
