@@ -1,0 +1,32 @@
+related:
+	> publications of authors of given publication
+	> publications of year of given publiation
+ranking:
+	> year
+	> research area
+.
+data.sql
+	> add keywords = 3 first words from title
+.
+ER
+	> remove username from user
+	> add keywords to publications
+	> add relation type (1:N, 1:1, N:M)
+		> users - suggestions, 1:N
+		> suggestions - publications, N:1
+		> users - publications, N:M
+		> users - users, N:M
+.
+select, insert, delete, update publications
+SELECT * FROM publications WHERE <column> = <value>;
+INSERT INTO publications (title, authors,research_field,publication_year,venue,papertype,arxiv_id) VALUES (<all column values except pid>);
+DELETE FROM publications WHERE pid = <pid of publication to be deleted>;
+UPDATE publications SET <column> = <value> WHERE pid = <pid of publication to be updated>;
+.
+search
+____ > simple - lookup for given word(s) in one specific column or among all columns
+____ + ex. SELECT ...
+____ > related
+____ ____ > get all authors of given article, for each author search all his publications
+____ ____ > search for articles of the same year as given
+.
