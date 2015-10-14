@@ -1,0 +1,20 @@
+	form
+p_list.php
+
+	input
+name=q, value={{q}}
+
+	table
+row format - [[<tr>...</tr>]]
+... - {{title}}, {{research_area}}, {{publication_year}}, link p_info.php?pid={{pid}}
+
+	text
+{{pages}}
+
+	link
+home.php
+format - [[<a href=HREF>TEXT</a>]]
+|   TEXT		|   HREF										|
+| {{previous}}	| p_list.php?page={{previous}}&q={{q}}			|
+| {{current}}	| p_list.php?page={{current}}&q={{q}}			|
+| {{next}}		| p_list.php?page={{next}}&q={{q}}				|
