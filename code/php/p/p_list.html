@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>p_list</title>
+	</head>
+	<body>
+		<style>
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+		</style>
+		<form action='p_list.php' style='border: 1px solid black; padding: 5px;'>
+			<input type='text' name='q' value='{{q}}' />
+			<input type='submit' value='search' />
+		</form>
+		<br>
+		<span>{{total}} publications were found</span><br>
+		<table>
+			<tr>
+				<th>title</th>
+				<th>authors</th>
+				<th>year</th>
+				<th>research field</th>
+				<th>info</th>
+			</tr>
+			[[<tr>
+				<td>{{title}}</td>
+				<td>{{authors}}</td>
+				<td>{{publication_year}}</td>
+				<td>{{research_field}}</td>
+				<td><a href='p_info.php?pid={{pid}}'>info</a></td>
+			</tr>]]
+		</table>
+		<br>
+		<div style='border: 1px solid black; padding: 5px;'>
+			Page
+			[[<a href='p_list.php?page={{previous}}&q={{q}}'>...{{previous}}</a>,]]
+			({{current}})[[,
+			<a href='p_list.php?page={{next}}&q={{q}}'>{{next}}...</a>]]
+		</div>
+		<ul>
+			<li><a href='../home.php'>home</a></li>
+		</ul>
+	</body>
+</html>

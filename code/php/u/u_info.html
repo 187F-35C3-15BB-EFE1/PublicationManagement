@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<title>u_info</title>
+	</head>
+	<body>
+		<dl>
+			<dt>UID</dt>
+			<dd>{{uid}}</dd>
+			<dt>email</dt>
+			<dd>{{email}}</dd>
+			<dt>role</dt>
+			<dd>
+				<form action='u_info.php' style='border: 1px solid black; padding: 5px;'>
+					<input type='hidden' name='uid' value='{{uid}}' />
+					<select name='role'>
+						<option {{role_suggester}} value='suggester'>suggester</option>
+						<option {{role_moderator}} value='moderator'>moderator</option>
+						<option {{role_administrator}} value='administrator'>administrator</option>
+					</select><br>
+					<input type='submit' value='change' />
+				</form>
+			</dd>
+		</dl>
+		</li>
+			<li><a href='u_list.php'>u_list</a></li>
+			<li><a href='../home.php'>home</a></li>
+		</ul>
+	</body>
+</html>
