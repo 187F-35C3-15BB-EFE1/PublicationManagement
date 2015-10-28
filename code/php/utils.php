@@ -158,28 +158,6 @@ function publication_get_by_pid ($pid) {
 	return $pub;
 }
 
-function publication_get_list ($offset, $count, $condition = "") {
-	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", /*"keywords"*/);
-	$query = "SELECT * FROM publications";
-	if (0 < strlen ($condition)) {
-		$query .= " WHERE $condition";
-	}
-	$query .= " LIMIT $count OFFSET $offset;";
-	$pubs = sql_query_array ($query);
-	if ($pubs) {
-		$pubs = map_fieldsm ($fields, $pubs);
-	} else {
-		$pubs = array ();
-	}
-	$query = "SELECT COUNT (*) FROM publications";
-	if (0 < strlen ($condition)) {
-		$query .= " WHERE $condition";
-	}
-	$total = sql_query_int ($query.";", 0);
-
-	return wtflist ($pubs, $total, $offset);
-}
-
 function map_fields ($fields, $row) {
 	$res = array ();
 	for ($j = 0; $j < count ($fields) && $j < count ($row); $j ++) {
