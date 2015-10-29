@@ -202,6 +202,31 @@ function publication_get_by_pid ($pid) {
 	}
 	return $pub;
 }
+function publication_add ($pub) {
+	$columns = array ();
+	$values = array ();
+	foreach ($pub as $k => $v) {
+		$columns[] = sqle ($k);
+		$values[] = "'".sqle ($v)."'";
+	}
+	$query = "INSERT INTO publications (".implode (",", $columns).") VALUES (".implode (",", $values).");";
+	return sql_query ($query);
+}
+function publication_delete_by_pid ($pid) {
+	$pid = sqle ($pid);
+	$query = "DELETE FROM publications WHERE pid=$pid;";
+	return sql_query ($query);
+}
+function publication_change_using_suggestion ($sug) {
+	$pid = $sug["to_pid"];
+	$changes = json_decode ($sug["changes"]);
+	$assignments = array ();
+	foreach ($changes as $k => $v) {
+		$assignments[] = sqle ($k)."='".sqle ($v)."'";
+	}
+	$query = "UPDATE publications SET ".implode (",", $assignments)." WHERE pid=$pid;";
+	return sql_query ($query);
+}
 
 function suggestion_get_list ($offset, $count) {
 	// sid title email
@@ -211,7 +236,11 @@ function suggestion_get_list ($offset, $count) {
 	if ($sugs) {
 		$sugs = map_fieldsm ($fields, $sugs);
 		for ($i = 0; $i < count ($sugs); $i ++) {
-			$sugs[$i]["type"] = suggestion_get_type ($sugs[$i]);
+			$type = suggestion_get_type ($sugs[$i]);
+			$sugs[$i]["type"] = $type;
+			if ($type == "new") {
+				$sugs[$i]["title"] = json_decode ($sugs[$i]["changes"])->title;
+			}
 		}
 	} else {
 		$sugs = array ();
@@ -265,6 +294,29 @@ function suggestion_get_type ($sug) {
 	} else {
 		return "change";
 	}
+}
+function suggestion_apply ($sug) {
+	$type = suggestion_get_type ($sug);
+	$ret = suggestion_delete ($sug);
+	if ($ret) {
+		if ($type == "new") {
+			$pub = json_decode ($sug["changes"]);
+			$ret = $ret && publication_add ($pub);
+		} else if ($type == "delete") {
+			$ret = $ret && publication_delete_by_pid ($sug["to_pid"]);
+		} else if ($type == "change") {
+			$ret = $ret && publication_change_using_suggestion ($sug);
+		}
+	}
+	return $ret;
+}
+function suggestion_reject ($sug) {
+	return suggestion_delete ($sug);
+}
+function suggestion_delete ($sug) {
+	$sid = sqle ($sug["sid"]);
+	$query = "DELETE FROM suggestions WHERE sid=$sid;";
+	return sql_query ($query);
 }
 
 function map_fields ($fields, $row) {
