@@ -34,9 +34,10 @@ if (user_check_role_includes ($loggedin_user["role"], "moderator")) {
 
 			$page = repeat_fill ($page, "[[", "]]", "{{column_name}}", $columns);
 
-			/*if ($type == "change") {
+			if ($type == "change") {
 				$page = repeat_fill ($page, "[[", "]]", "{{column_name}}", $columns);
-			}*/
+				$page = repeat_fill ($page, "[[", "]]", "{{column_name}}", $columns);
+			}
 
 			if ($type != "new") {
 				$page = page_replace_fields ($page, htmlem ($old_pub), "{{old_", "}}");
@@ -51,6 +52,16 @@ if (user_check_role_includes ($loggedin_user["role"], "moderator")) {
 					$new_pub[$k] = $v;
 				}
 				$page = page_replace_fields ($page, htmlem ($new_pub), "{{new_", "}}");
+			}
+			if ($type == "change") {
+				$checked = array ();
+				for ($i = 0; $i < count ($columns); $i ++) {
+					$checked[$columns[$i]] = "";
+				}
+				foreach ($sug["changes"] as $k => $v) {
+					$checked[$k] = "checked";
+				}
+				$page = page_replace_fields ($page, htmlem ($checked), "{{checked_", "}}");
 			}
 
 			echo $page;

@@ -14,6 +14,9 @@ function param_get_ok ($name) {
 function param_get ($name, $default) {
 	return param_get_ok ($name) ? $_GET[$name] : $default;
 }
+function param_get_array ($name, $default) {
+	return isset ($_GET[$name]) ? $_GET[$name] : $default;
+}
 function param_get_num_ok ($name) {
 	return param_get_ok ($name) && is_numeric (param_get ($name, NULL));
 }
@@ -232,7 +235,6 @@ function suggestion_add_new ($new_pub, $uid) {
 	$changes = json_encode ($new_pub);
 	$changes = sqle ($changes);
 	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, NULL, '$changes');";
-	echo "<HR>".htmle ($query)."<HR>";
 	return sql_query ($query);
 }
 function suggestion_add_delete ($pid, $uid) {
@@ -240,7 +242,19 @@ function suggestion_add_delete ($pid, $uid) {
 	$pid = sqle ($pid);
 	$changes = "delete";
 	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
-	echo "<HR>".htmle ($query)."<HR>";
+	return sql_query ($query);
+}
+function suggestion_add_change ($pid, $new_pub, $columns, $uid) {
+	$uid = sqle ($uid);
+	$pid = sqle ($pid);
+	$changes = array ();
+	for ($i = 0; $i < count ($columns); $i ++) {
+		$column = $columns[$i];
+		$changes[$column] = $new_pub[$column];
+	}
+	$changes = json_encode ($changes);
+	$changes = sqle ($changes);
+	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
 	return sql_query ($query);
 }
 function suggestion_get_type ($sug) {
