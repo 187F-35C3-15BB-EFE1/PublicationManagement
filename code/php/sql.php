@@ -39,6 +39,13 @@ function sqle ($s) {
 	sql_require ();
 	return pg_escape_string ($sql_con, $s);
 }
+function sqlem ($ss) {
+	$res = array ();
+	foreach ($ss as $k => $v) {
+		$res[$k] = sqle ($v);
+	}
+	return $res;
+}
 
 function sql_require () {
 	global $sql_con;

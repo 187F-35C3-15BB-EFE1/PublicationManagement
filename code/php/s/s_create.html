@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>s_create</title>
+	</head>
+	<body>
+		<style>
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+		</style>
+		<b>
+			suggest&nbsp;
+			[[new]]
+			[[change]]
+			[[delete]]
+		</b>
+		<form action='s_create.php' style='border: 1px solid black; padding: 5px;'>
+			<span style='color: red;'>{{error_message}}</span>
+			<input type='hidden' name='type' value='{{type}}' />
+			[[<input type='hidden' name='pid' value='{{pid}}' />]]
+			<input type='hidden' name='confirm' value='confirm' />
+			<table>
+				<tr>
+					<th></th>
+					[[<th>{{column_name}}</th>]]
+				</tr>
+				{[<tr>
+					<td>old</td>
+					[[<td>{{old_{{column_name}}}}</td>]]
+				</tr>]}
+				{[<tr>
+					<td>new</td>
+					[[<td><input type='text' name='new_{{column_name}}' value='{{new_{{column_name}}}}' /></td>]]
+				</tr>]}
+				{[<tr>
+					<td>change</td>
+					[[<td><input type='checkbox' name='changed[]' value='{{column_name}}' /></td>]]
+				</tr>]}
+			</table>
+			[[<span>leave fields in new section empty to keep it's old value</span><br>]]
+			<input type='submit' value='suggest' />
+		</form>
+		</li>
+			<li><a href='s_list.php'>s_list</a></li>
+			<li><a href='../home.php'>home</a></li>
+		</ul>
+	</body>
+</html>

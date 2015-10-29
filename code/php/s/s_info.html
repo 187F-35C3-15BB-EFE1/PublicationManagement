@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<title>s_info</title>
+	</head>
+	<body>
+		<style>
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+		</style>
+		<b>
+			suggestion&nbsp;
+			[[to add new]]
+			[[to change]]
+			[[to delete]]
+		</b>
+		<table>
+			<tr>
+				<th></th>
+				[[<th>{{column_name}}</th>]]
+			</tr>
+			{[<tr>
+				<td>old</td>
+				[[<td>{{old_{{column_name}}}}</td>]]
+			</tr>]}
+			{[<tr>
+				<td>new</td>
+				[[<td>{{new_{{column_name}}}}</td>]]
+			</tr>]}
+			{[<tr>
+				<td>changed</td>
+				[[<td><input type='checkbox' readonly {{changed_{{column_name}}}} /></td>]]
+			</tr>]}
+		</table>
+		</li>
+			<li><a href='s_list.php'>s_list</a></li>
+			<li><a href='../home.php'>home</a></li>
+		</ul>
+	</body>
+</html>

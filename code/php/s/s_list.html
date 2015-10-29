@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<title>s_list</title>
+	</head>
+	<body>
+		<style>
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+		</style>
+		<span>{{total}} suggestions were found</span><br>
+		<table>
+			<tr>
+				<th>sid</th>
+				<th>title</th>
+				<th>email</th>
+				<th>type</th>
+				<th>info</th>
+			</tr>
+			[[<tr>
+				<td>{{sid}}</td>
+				<td>{{title}}</td>
+				<td>{{email}}</td>
+				<td>{{type}}</td>
+				<td><a href='s_info.php?sid={{sid}}'>info</a></td>
+			</tr>]]
+		</table>
+		<br>
+		<div style='border: 1px solid black; padding: 5px;'>
+			Page
+			[[<a href='s_list.php?page={{previous}}}'>...{{previous}}</a>,]]
+			({{current}})[[,
+			<a href='s_list.php?page={{next}}'>{{next}}...</a>]]
+		</div>
+		<ul>
+			<li><a href='../home.php'>home</a></li>
+		</ul>
+	</body>
+</html>

@@ -59,13 +59,14 @@ function page_split ($p, $ml, $mr) {
 	return array ($b, $c, $a);
 }
 
+$user_roles = array ("null", "suggester", "moderator", "administrator");
 function user_login ($email, $password) {
 	return $password == "1234" && $email == "@";
 }
 function user_signup ($email, $password) {
 	$email = sqle ($email);
 	$password = sqle ($password);
-	$query = "INSERT INTO users (email, password, role) VALUES ('$email', '$password', 'suggester');";
+	$query = "INSERT INTO users (email, password, role) VALUES ('$email', '$password', ".user_role_to_num ("suggester").");";
 	return sql_query ($query);
 }
 function user_signup_check ($email, $password) {
@@ -86,6 +87,7 @@ function user_get_list ($offset, $count) {
 	$users = sql_query_array ($query);
 	if ($users) {
 		$users = map_fieldsm ($fields, $users);
+		$users = user_num_to_rolem ($users);
 	} else {
 		$users = array ();
 	}
@@ -101,19 +103,47 @@ function user_get_by_uid ($uid) {
 	$user = sql_query_one ($query);
 	if ($user) {
 		$user = map_fields ($fields, $user);
+		$user["role"] = user_num_to_role ($user["role"]);
 	}
 	return $user;
 }
 function user_get_loggedin () {
-	return FALSE;
-	//return array ("role" => "administrator");
+	/*if (param_get_ok ("auth")) {
+		return user_get_by_uid (param_get ("auth"));
+	}*/
+	return array ("role" => "suggester", "uid" => 2);
+	return array ("role" => "administrator", "uid" => 2);
+	return array ("role" => "moderator", "uid" => 2);
+	return array ("role" => "null");
 }
 function user_set_role ($uid, $role) {
-
+	$role = user_role_to_num ($role);
+	$role = sqle ($role);
+	$uid = sqle ($uid);
+	$query = "UPDATE users SET role=$role WHERE uid='$uid';";
+	return sql_query ($query);
 }
+function user_num_to_role ($num) {
+	global $user_roles;
+	return $user_roles[$num];
+}
+function user_num_to_rolem ($users) {
+	for ($i = 0; $i < count ($users); $i ++) {
+		$users[$i]["role"] = user_num_to_role ($users[$i]["role"]);
+	}
+	return $users;
+}
+function user_role_to_num ($role) {
+	global $user_roles;
+	return array_search ($role, $user_roles);
+}
+function user_check_role_includes ($role, $target) {
+	return user_role_to_num ($target) <= user_role_to_num ($role);
+}
+
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 function publication_get_list ($offset, $count, $condition = "") {
-	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", /*"keywords"*/);
+	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 	$query = "SELECT * FROM publications";
 	if (0 < strlen ($condition)) {
 		$query .= " WHERE $condition";
@@ -135,7 +165,7 @@ function publication_get_list ($offset, $count, $condition = "") {
 }
 function publication_get_list_by_q ($offset, $count, $q) {
 	$q = sqle ($q);
-	$fields = array ("title", "authors", "venue", "papertype"/*, "keywords"*/);
+	$fields = array ("title", "authors", "venue", "papertype", "keywords");
 	$mask = "'%$q%'";
 	$parts = array ();
 	for ($i = 0; $i < count ($fields); $i ++) {
@@ -148,7 +178,7 @@ function publication_get_list_by_q ($offset, $count, $q) {
 	return publication_get_list ($offset, $count, $condition);
 }
 function publication_get_by_pid ($pid) {
-	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link"/*, "keywords"*/);
+	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 	$pid = sqle ($pid);
 	$query = "SELECT * FROM publications WHERE pid='$pid' LIMIT 1;";
 	$pub = sql_query_one ($query);
@@ -156,6 +186,66 @@ function publication_get_by_pid ($pid) {
 		$pub = map_fields ($fields, $pub);
 	}
 	return $pub;
+}
+
+function suggestion_get_list ($offset, $count) {
+	// sid title email
+	$fields = array ("sid", "from_uid", "to_pid", "changes");
+	$query = "SELECT * FROM suggestions LIMIT $count OFFSET $offset;";
+	$sugs = sql_query_array ($query);
+	if ($sugs) {
+		$sugs = map_fieldsm ($fields, $sugs);
+
+		for ($i = 0; $i < count ($sugs); $i ++) {
+			$sug = $sugs[$i];
+			$pub = publication_get_by_pid ($sug["to_pid"]);
+			$user = user_get_by_uid ($sug["from_uid"]);
+			$sug["title"] = $pub["title"];
+			$sug["email"] = $user["email"];
+			$sug["type"] = suggestion_get_type ($sug);
+			$sugs[$i] = $sug;
+		}
+	} else {
+		$sugs = array ();
+	}
+	$total = sql_query_int ("SELECT COUNT (*) FROM suggestions;", 0);
+
+	return wtflist ($sugs, $total, $offset);
+}
+function suggestion_get_by_sid ($sid) {
+	$fields = array ("sid", "from_uid", "to_pid", "changes");
+	$sid = sqle ($sid);
+	$query = "SELECT * FROM suggestions WHERE sid='$sid' LIMIT 1;";
+	$sug = sql_query_one ($query);
+	if ($sug) {
+		$sug = map_fields ($fields, $sug);
+	}
+	return $sug;
+}
+function suggestion_add_new ($new_pub, $uid) {
+	$uid = sqle ($uid);
+	$changes = json_encode ($new_pub);
+	$changes = sqle ($changes);
+	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, NULL, '$changes');";
+	echo "<HR>".htmle ($query)."<HR>";
+	return sql_query ($query);
+}
+function suggestion_add_delete ($pid, $uid) {
+	$uid = sqle ($uid);
+	$pid = sqle ($pid);
+	$changes = "delete";
+	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
+	echo "<HR>".htmle ($query)."<HR>";
+	return sql_query ($query);
+}
+function suggestion_get_type ($sug) {
+	if ($sug["to_pid"] == NULL) {
+		return "new";
+	} else if ($sug["changes"] == "delete") {
+		return "delete";
+	} else {
+		return "change";
+	}
 }
 
 function map_fields ($fields, $row) {
@@ -171,5 +261,28 @@ function map_fieldsm ($fields, $rows) {
 		$res[] = map_fields ($fields, $rows[$i]);
 	}
 	return $res;
+}
+
+function keep_or_omit ($page, $ml, $mr, $keep) {
+	$parts = page_split ($page, $ml, $mr);
+	$page = "";
+	$page .= $parts[0];
+	if ($keep) {
+		$page .= $parts[1];
+	}
+	$page .= $parts[2];
+	return $page;
+}
+
+function repeat_fill ($page, $ml, $mr, $m, $vals) {
+	$parts = page_split ($page, $ml, $mr);
+	$page = "";
+	$page .= $parts[0];
+	for ($i = 0; $i < count ($vals); $i ++) {
+		$val = $vals[$i];
+		$page .= page_replace ($parts[1], $m, htmle ($val));
+	}
+	$page .= $parts[2];
+	return $page;
 }
 ?>
