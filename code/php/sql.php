@@ -15,7 +15,11 @@ function sql_next ($rows) {
 function sql_query_one ($query) {
 	global $sql_con;
 	sql_require ();
-	return sql_next (sql_query ($query));
+	$res = sql_query ($query);
+	if ($res) {
+		$res = sql_next ($res);
+	}
+	return $res;
 }
 
 function sql_query_array ($query) {

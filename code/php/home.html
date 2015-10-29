@@ -4,13 +4,15 @@
 		<title>home</title>
 	</head>
 	<body>
+		<span>Role: <b>{{role}}</b></span>
 		<ul>
 			<li>
 				u<br>
 				<ul>
-					<li><a href='u/u_signup.php'>u_signup</a></li>
-					<li><a href='u/u_login.php'>u_login</a></li>
-					<li>
+					[[<li><a href='u/u_signup.php'>u_signup</a></li>
+					<li><a href='u/u_login.php'>u_login</a></li>]]
+					[[<li><a href='u/u_logout.php'>u_logout</a></li>]]
+					[[<li>
 						<a href='u/u_list.php'>u_list</a>
 						<form action='u/u_list.php' style='border: 1px solid black; padding: 5px;'>
 							page: 
@@ -25,7 +27,7 @@
 							<input type='text' name='uid' />
 							<input type='submit' value='info' />
 						</form>
-					</li>
+					</li>]]
 				</ul>
 			</li>
 			<li>
@@ -54,20 +56,20 @@
 					</li>
 				</ul>
 			</li>
-			<li>
+			{[<li>
 				s<br>
 				<ul>
-					<li>
+					[[<li>
 						<a href='s/s_list.php'>s_list</a>
 						<form action='s/s_list.php' style='border: 1px solid black; padding: 5px;'>
 							page: 
 							<input type='text' name='page' />
 							<input type='submit' value='info' />
 						</form>
-					</li>
-					<li><a href='s/s_create.php?auth=2'>s_create</a></li>
+					</li>]]
+					<li><a href='s/s_create.php'>s_create</a></li>
 				</ul>
-			</li>
+			</li>]}
 		</ul>
 	</body>
 </html>

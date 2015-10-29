@@ -61,7 +61,18 @@ function page_split ($p, $ml, $mr) {
 
 $user_roles = array ("null", "suggester", "moderator", "administrator");
 function user_login ($email, $password) {
-	return $password == "1234" && $email == "@";
+	$email = sqle ($email);
+	$password = sqle ($password);
+	$query = "SELECT uid FROM users WHERE email='$email' AND password='$password' LIMIT 1;";
+	$uid = sql_query_one ($query);
+	pg_last_error ();
+	if ($uid) {
+		setcookie ('user', $uid[0], 0, '/');
+	}
+	return $uid;
+}
+function user_logout () {
+	setcookie ('user', '', 1, '/');
 }
 function user_signup ($email, $password) {
 	$email = sqle ($email);
@@ -108,13 +119,14 @@ function user_get_by_uid ($uid) {
 	return $user;
 }
 function user_get_loggedin () {
-	/*if (param_get_ok ("auth")) {
-		return user_get_by_uid (param_get ("auth"));
-	}*/
-	return array ("role" => "suggester", "uid" => 2);
-	return array ("role" => "administrator", "uid" => 2);
-	return array ("role" => "moderator", "uid" => 2);
-	return array ("role" => "null");
+	$user = NULL;
+	if (isset ($_COOKIE['user'])) {
+		$user = user_get_by_uid ($_COOKIE['user']);
+	}
+	if (!$user) {
+		$user = array ("role" => "null");
+	}
+	return $user;
 }
 function user_set_role ($uid, $role) {
 	$role = user_role_to_num ($role);
