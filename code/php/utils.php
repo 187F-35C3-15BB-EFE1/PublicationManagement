@@ -202,20 +202,13 @@ function publication_get_by_pid ($pid) {
 
 function suggestion_get_list ($offset, $count) {
 	// sid title email
-	$fields = array ("sid", "from_uid", "to_pid", "changes");
-	$query = "SELECT * FROM suggestions LIMIT $count OFFSET $offset;";
+	$fields = array ("sid", "from_uid", "to_pid", "changes", "title", "email");
+	$query = "SELECT s.sid AS sid, s.from_uid AS from_uid, s.to_pid AS to_pid, s.changes AS changes, p.title AS title, u.email AS email FROM suggestions s LEFT OUTER JOIN users u ON s.from_uid = u.uid LEFT OUTER JOIN publications p ON s.to_pid = p.pid LIMIT $count OFFSET $offset;";
 	$sugs = sql_query_array ($query);
 	if ($sugs) {
 		$sugs = map_fieldsm ($fields, $sugs);
-
 		for ($i = 0; $i < count ($sugs); $i ++) {
-			$sug = $sugs[$i];
-			$pub = publication_get_by_pid ($sug["to_pid"]);
-			$user = user_get_by_uid ($sug["from_uid"]);
-			$sug["title"] = $pub["title"];
-			$sug["email"] = $user["email"];
-			$sug["type"] = suggestion_get_type ($sug);
-			$sugs[$i] = $sug;
+			$sugs[$i]["type"] = suggestion_get_type ($sugs[$i]);
 		}
 	} else {
 		$sugs = array ();
