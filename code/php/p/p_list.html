@@ -14,7 +14,15 @@ table, tr, th, td {
 			<input type='text' name='q' value='{{q}}' />
 			<input type='submit' value='search' />
 		</form>
-		<br>
+		<span>
+			order by
+			[[<a href='p_list.php?q={{q}}&order&related={{related}}&pid={{pid}}'>none</a>]]
+			[[<b>none</b>]],
+			[[<a href='p_list.php?q={{q}}&order=year&related={{related}}&pid={{pid}}'>year</a>]]
+			[[<b>year</b>]],
+			[[<a href='p_list.php?q={{q}}&order=field&related={{related}}&pid={{pid}}'>research field</a>]]
+			[[<b>research field</b>]]
+		<span><br>
 		<span>{{total}} publications were found</span><br>
 		<table>
 			<tr>
@@ -35,11 +43,12 @@ table, tr, th, td {
 		<br>
 		<div style='border: 1px solid black; padding: 5px;'>
 			Page
-			[[<a href='p_list.php?page={{previous}}&q={{q}}'>...{{previous}}</a>,]]
+			[[<a href='p_list.php?page={{previous}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>...{{previous}}</a>,]]
 			({{current}})[[,
-			<a href='p_list.php?page={{next}}&q={{q}}'>{{next}}...</a>]]
+			<a href='p_list.php?page={{next}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>{{next}}...</a>]]
 		</div>
 		<ul>
+			[[<li><a href='../s/s_create.php'>s_create</a></li>]]
 			<li><a href='../home.php'>home</a></li>
 		</ul>
 	</body>

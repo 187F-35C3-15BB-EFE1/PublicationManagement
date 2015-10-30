@@ -24,7 +24,13 @@
 			<dt>link</dt>
 			<dd><a href='{{link}}'>link</a></dd>
 		</dl>
+		[[<div style='border: 1px solid black; padding: 5px;'>
+			<a href='../s/s_create.php?pid={{pid}}&type=change' style='background: #f0f040;'>change</a><br>
+			<a href='../s/s_create.php?pid={{pid}}&type=delete' style='background: #f04040;'>delete</a>
+		</div>]]
 		</li>
+			<li><a href='p_list.php?pid={{pid}}&related=authors'>same authors</a></li>
+			<li><a href='p_list.php?pid={{pid}}&related=year'>same year</a></li>
 			<li><a href='p_list.php'>p_list</a></li>
 			<li><a href='../home.php'>home</a></li>
 		</ul>

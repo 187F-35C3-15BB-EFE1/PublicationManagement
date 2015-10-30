@@ -97,7 +97,7 @@ function wtflist ($data, $total, $offset) {
 function user_get_list ($offset, $count) {
 	$fields = array ("uid", "email", "role");
 
-	$query = "SELECT uid, email, role FROM users LIMIT $count OFFSET $offset;";
+	$query = "SELECT uid, email, role FROM users ORDER BY uid LIMIT $count OFFSET $offset;";
 	$users = sql_query_array ($query);
 	if ($users) {
 		$users = map_fieldsm ($fields, $users);
@@ -157,14 +157,24 @@ function user_check_role_includes ($role, $target) {
 }
 
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
-function publication_get_list ($offset, $count, $condition = "") {
+function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 	$query = "SELECT * FROM publications";
 	if (0 < strlen ($condition)) {
 		$query .= " WHERE $condition";
 	}
-	$query .= " LIMIT $count OFFSET $offset;";
+	if ($order == "year") {
+		$order = "publication_year DESC,";
+	} else if ($order == "field") {
+		$order = "research_field,";
+	} else {
+		$order = "";
+	}
+	$order .= "pid";
+	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
 	$pubs = sql_query_array ($query);
+	echo "<HR>".$query."<HR>";
+	echo "<HR>".pg_last_error()."<HR>";
 	if ($pubs) {
 		$pubs = map_fieldsm ($fields, $pubs);
 	} else {
@@ -178,7 +188,7 @@ function publication_get_list ($offset, $count, $condition = "") {
 
 	return wtflist ($pubs, $total, $offset);
 }
-function publication_get_list_by_q ($offset, $count, $q) {
+function publication_get_list_by_q ($offset, $count, $order, $q) {
 	$q = sqle ($q);
 	$fields = array ("title", "authors", "venue", "papertype", "keywords");
 	$mask = "'%$q%'";
@@ -190,7 +200,40 @@ function publication_get_list_by_q ($offset, $count, $q) {
 		$parts[] = "publication_year = $q";
 	}
 	$condition = implode (" OR ", $parts);
-	return publication_get_list ($offset, $count, $condition);
+	return publication_get_list ($offset, $count, $order, $condition);
+}
+function publication_get_related_list ($offset, $count, $order, $related, $pid) {
+	$pub = publication_get_by_pid ($pid);
+	if ($pub) {
+		if ($related == "year") {
+			$condition = "publication_year = ".$pub["publication_year"];
+		} else if ($related == "authors") {
+			$parts = array ();
+			$authors = explode (",", $pub["authors"]);
+			for ($i = 0; $i < count ($authors); $i ++) {
+				$parts[] = "authors LIKE '%".sqle ($authors[$i])."%'";
+			}
+			$condition = implode (" OR ", $parts);
+		} else {
+			$condition = "0 <> 0";
+		}
+		return publication_get_list ($offset, $count, $order, $condition);
+	} else {
+		return array ();
+	}
+	// // // // // // // // // // // // // // // // // // // // // // 
+	$q = sqle ($q);
+	$fields = array ("title", "authors", "venue", "papertype", "keywords");
+	$mask = "'%$q%'";
+	$parts = array ();
+	for ($i = 0; $i < count ($fields); $i ++) {
+		$parts[] = $fields[$i]." LIKE $mask";
+	}
+	if (is_numeric ($q)) {
+		$parts[] = "publication_year = $q";
+	}
+	$condition = implode (" OR ", $parts);
+	return publication_get_list ($offset, $count, $order, $condition);
 }
 function publication_get_by_pid ($pid) {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
@@ -231,7 +274,7 @@ function publication_change_using_suggestion ($sug) {
 function suggestion_get_list ($offset, $count) {
 	// sid title email
 	$fields = array ("sid", "from_uid", "to_pid", "changes", "title", "email");
-	$query = "SELECT s.sid AS sid, s.from_uid AS from_uid, s.to_pid AS to_pid, s.changes AS changes, p.title AS title, u.email AS email FROM suggestions s LEFT OUTER JOIN users u ON s.from_uid = u.uid LEFT OUTER JOIN publications p ON s.to_pid = p.pid LIMIT $count OFFSET $offset;";
+	$query = "SELECT s.sid AS sid, s.from_uid AS from_uid, s.to_pid AS to_pid, s.changes AS changes, p.title AS title, u.email AS email FROM suggestions s LEFT OUTER JOIN users u ON s.from_uid = u.uid LEFT OUTER JOIN publications p ON s.to_pid = p.pid ORDER BY sid LIMIT $count OFFSET $offset;";
 	$sugs = sql_query_array ($query);
 	if ($sugs) {
 		$sugs = map_fieldsm ($fields, $sugs);
