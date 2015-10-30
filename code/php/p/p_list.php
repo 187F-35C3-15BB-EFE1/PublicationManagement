@@ -96,9 +96,6 @@ if ($redirect) {
 
 	$page = keep_or_omit ($page, "[[", "]]", $is_user);
 
-	// keep_or_omit ($page, $ml, $mr, $keep)
-	// repeat_fill ($page, $ml, $mr, $m, $vals)
-
 	$page = page_replace ($page, "{{order}}", $order);
 	$page = page_replace ($page, "{{q}}", $q);
 	$page = page_replace ($page, "{{related}}", $related);
