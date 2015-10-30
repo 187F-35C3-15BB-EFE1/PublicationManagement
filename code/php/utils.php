@@ -173,8 +173,6 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 	$order .= "pid";
 	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
 	$pubs = sql_query_array ($query);
-	echo "<HR>".$query."<HR>";
-	echo "<HR>".pg_last_error()."<HR>";
 	if ($pubs) {
 		$pubs = map_fieldsm ($fields, $pubs);
 	} else {
@@ -221,19 +219,6 @@ function publication_get_related_list ($offset, $count, $order, $related, $pid) 
 	} else {
 		return array ();
 	}
-	// // // // // // // // // // // // // // // // // // // // // // 
-	$q = sqle ($q);
-	$fields = array ("title", "authors", "venue", "papertype", "keywords");
-	$mask = "'%$q%'";
-	$parts = array ();
-	for ($i = 0; $i < count ($fields); $i ++) {
-		$parts[] = $fields[$i]." LIKE $mask";
-	}
-	if (is_numeric ($q)) {
-		$parts[] = "publication_year = $q";
-	}
-	$condition = implode (" OR ", $parts);
-	return publication_get_list ($offset, $count, $order, $condition);
 }
 function publication_get_by_pid ($pid) {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
