@@ -1,0 +1,8 @@
+Required: PHP + PostgeSQL.
+Example: Bitnami WAPP.
+To launch project just put files to http server directory.
+There must be at least one administrator user.
+Suggesters can create suggestions.
+Moderators can list, view, accept, reject suggestions.
+Administrators can change priveleges of other users.
+Root directory is /PublicationManagement/code/php/ .
