@@ -2,54 +2,100 @@
 <html>
 	<head>
 		<title>p_list</title>
+		<link rel="stylesheet" type="text/css" href="../style/bootstrap3/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../style/bootstrap/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/custom-style.css">
 	</head>
 	<body>
 		<style>
-table, tr, th, td {
-	border-collapse: collapse;
-	border: 1px solid black;
-}
+		.sort {
+	margin-left: 15px;
+	}
+	.row {
+	padding: 10px;
+	}	
+	.input-mysize {
+		width: 150px;
+	}
+	.btn {
+		margin-left: -20px
+	}
 		</style>
-		<form action='p_list.php' style='border: 1px solid black; padding: 5px;'>
-			<input type='text' name='q' value='{{q}}' />
-			<input type='submit' value='search' />
-		</form>
-		<span>
-			order by
-			[[<a href='p_list.php?q={{q}}&order&related={{related}}&pid={{pid}}'>none</a>]]
-			[[<b>none</b>]],
-			[[<a href='p_list.php?q={{q}}&order=year&related={{related}}&pid={{pid}}'>year</a>]]
-			[[<b>year</b>]],
-			[[<a href='p_list.php?q={{q}}&order=field&related={{related}}&pid={{pid}}'>research field</a>]]
-			[[<b>research field</b>]]
-		<span><br>
-		<span>{{total}} publications were found</span><br>
-		<table>
-			<tr>
-				<th>title</th>
-				<th>authors</th>
-				<th>year</th>
-				<th>research field</th>
-				<th>info</th>
-			</tr>
-			[[<tr>
-				<td>{{title}}</td>
-				<td>{{authors}}</td>
-				<td>{{publication_year}}</td>
-				<td>{{research_field}}</td>
-				<td><a href='p_info.php?pid={{pid}}'>info</a></td>
-			</tr>]]
-		</table>
-		<br>
-		<div style='border: 1px solid black; padding: 5px;'>
-			Page
-			[[<a href='p_list.php?page={{previous}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>...{{previous}}</a>,]]
-			({{current}})[[,
-			<a href='p_list.php?page={{next}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>{{next}}...</a>]]
+		<nav class=" navbar navbar-custom navbar-fixed-top">
+			<div class="container-fluid">
+				</div class="navbar-header">
+					<a class="navbar-brand" href="../home.php">Publication Management System</a>
+				</div>
+
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+
+		</nav>
+
+
+    <div class="container">
+    	<div class="row" >
+	    	<div class="col-xs-12">
+	    		<h2>Search Results</h2>
+	    	</div>
+	 
+	    	<div class="col-xs-6">
+	      		<form  class="form-horizontal" action="p_list.php">
+	    			<div class="form-group">
+	    				<div class="col-xs-7">
+		   				<input class="form-control input-md" type="text" name="q" placeholder="Search">
+		   				</div>
+		   				<div class="col-xs-5">
+		   				<button type="submit input-group-btn" class="btn btn-primary input-md">Search</button>
+		   				</div>
+		   			</div>
+		   		</form>	
+	    	</div>
+	    	<div class="col-xs-6">
+	    		<b>Order by:</b>
+				[[<a class="sort btn btn-success" href='p_list.php?q={{q}}&order&related={{related}}&pid={{pid}}'>None</a>]]
+				[[<a class="sort btn btn-default"  href='#'>None</a>]],
+				[[<a class="sort btn btn-success"  href='p_list.php?q={{q}}&order=year&related={{related}}&pid={{pid}}'>Year</a>]]
+				[[<a class="sort btn btn-default"  href='#'>Year</a>]],
+				[[<a class="sort btn btn-success"  href='p_list.php?q={{q}}&order=field&related={{related}}&pid={{pid}}'>Research Field</a>]]
+				[[<a class="sort btn btn-default"  href='#'>Research Field</a>]]
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="col-xs-12">
+			    <table class="table table-bordered table-hover">
+					<tr>
+						<th>Title</th>
+						<th>Authors</th>
+						<th>Year</th>
+						<th>Research Field</th>
+						<th>Information & Source</th>
+					</tr>
+					[[<tr class="active">
+						<td>{{title}}</td>
+						<td>{{authors}}</td>
+						<td>{{publication_year}}</td>
+						<td>{{research_field}}</td>
+						<td><a href='p_info.php?pid={{pid}}'>info</a></td>
+					</tr>]]
+				</table>
+			</div>
 		</div>
-		<ul>
-			[[<li><a href='../s/s_create.php'>s_create</a></li>]]
-			<li><a href='../home.php'>home</a></li>
-		</ul>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<b>Page:</b>
+				[[<a href='p_list.php?page={{previous}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>...{{previous}}</a>,]]
+				({{current}})
+				[[,<a href='p_list.php?page={{next}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>{{next}}...</a>]]
+			</div>
+		</div>
+    </div>
+		[[<a href='../s/s_create.php'>s_create</a>]]
 	</body>
 </html>

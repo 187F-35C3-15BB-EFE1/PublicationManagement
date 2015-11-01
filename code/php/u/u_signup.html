@@ -2,19 +2,47 @@
 <html>
 	<head>
 		<title>u_signup</title>
+        <link rel="stylesheet" type="text/css" href="../style/bootstrap3/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../style/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../style/custom-style.css">
 	</head>
 	<body>
-		<form action='u_signup.php' style='border: 1px solid black; padding: 5px;'>
-			<span style='color: red;'>{{error_message}}</span>
-			email<br>
-			<input type='text' name='email' value='{{email}}' /><br>
-			password<br>
-			<input type='password' name='password' /><br>
-			<input type='submit' value='sign up' />
-		</form>
-		</li>
-			<li><a href='u_login.php'>u_login</a></li>
-			<li><a href='../home.php'>home</a></li>
-		</ul>
+        <nav class=" navbar navbar-custom navbar-fixed-top">
+            <div class="container-fluid">
+                </div class="navbar-header">
+                    <a class="navbar-brand" href="../home.php">Publication Management System</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+
+    <div class="container">
+    <div class="row">
+            <div class="col-xs-4">
+                <form role="form" action='u_signup.php'>
+                    <div style='color: red;' class="form-group">
+                        {{error_message}}
+                    </div>
+                    <div class="form-group">
+                        <b>Email</b>
+                        <input class="form-control" type='text' name='email' value='{{email}}' />
+                    </div>
+                    <div class="form-group">
+                        <b>Password</b>             
+                        <input class="form-control" type='password' name='password' />
+                    </div>
+                        <button class="btn btn-primary btn-md" type='submit'>Create Account</button>
+                        <a class="btn btn-success" href="u_login.php">Log In</a>
+                </form>
+            </div>
+        </div>
+    </div>
 	</body>
 </html>

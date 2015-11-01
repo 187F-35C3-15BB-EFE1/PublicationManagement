@@ -2,6 +2,9 @@
 <html>
 	<head>
 		<title>s_info</title>
+		<link rel="stylesheet" type="text/css" href="../style/bootstrap3/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../style/bootstrap/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/custom-style.css">
 	</head>
 	<body>
 		<style>
@@ -10,38 +13,56 @@ table, tr, th, td {
 	border: 1px solid black;
 }
 		</style>
-		<b>
+		<nav class=" navbar navbar-custom navbar-fixed-top">
+			<div class="container-fluid">
+				</div class="navbar-header">
+					<a class="navbar-brand" href="../home.php">Publication Management System</a>
+				</div>
+
+				<div>
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+
+		</nav>
+
+    <div class="container">
+	    <div class="row">
+	    	<div class="col-xs-12">
+		<h1>
 			suggestion&nbsp;
 			[[to add new]]
 			[[to change]]
 			[[to delete]]
-		</b>
-		<table>
-			<tr>
-				<th></th>
-				[[<th>{{column_name}}</th>]]
-			</tr>
-			{[<tr>
-				<td>old</td>
-				[[<td>{{old_{{column_name}}}}</td>]]
-			</tr>]}
-			{[<tr>
-				<td>new</td>
-				[[<td>{{new_{{column_name}}}}</td>]]
-			</tr>]}
-			{[<tr>
-				<td>changed</td>
-				[[<td><input type='checkbox' disabled readonly {{checked_{{column_name}}}} /></td>]]
-			</tr>]}
-		</table>
-		<br>
+		</h1>
+			    <table class="table table-bordered table-hover">
+					<tr>
+						<th></th>
+						[[<th>{{column_name}}</th>]]
+					</tr>
+					{[<tr>
+						<td>old</td>
+						[[<td>{{old_{{column_name}}}}</td>]]
+					</tr>]}
+					{[<tr>
+						<td>new</td>
+						[[<td>{{new_{{column_name}}}}</td>]]
+					</tr>]}
+					{[<tr>
+						<td>changed</td>
+						[[<td><input type='checkbox' disabled readonly {{checked_{{column_name}}}} /></td>]]
+					</tr>]}
+				</table>
+			</div>
+		</div>
 		<div style='border: 1px solid black; padding: 5px;'>
 			<a href='s_info.php?sid={{sid}}&action=reject' style='background: #f04040;'>reject</a><br>
 			<a href='s_info.php?sid={{sid}}&action=apply' style='background: #40f040;'>apply</a>
 		</div>
-		</li>
-			<li><a href='s_list.php'>s_list</a></li>
-			<li><a href='../home.php'>home</a></li>
-		</ul>
+		
+		</div>
 	</body>
 </html>
