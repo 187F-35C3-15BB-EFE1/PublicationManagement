@@ -1,5 +1,8 @@
 <?php
 
+ignore_user_abort (TRUE);
+set_time_limit (30);
+
 include "sql.php";
 
 function utils_redirect ($to) {
