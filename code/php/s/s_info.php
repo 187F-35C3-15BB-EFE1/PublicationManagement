@@ -15,7 +15,7 @@ $actions = array ("apply", "reject");
 $loggedin_user = user_get_loggedin ();
 
 if (param_get_ok ("action") && !in_array ($action, $actions)) {
-	//utils_redirect ("s_info.php?sid=$sid");
+	utils_redirect ("s_info.php?sid=$sid#s_info_unknown_action");
 } else {
 	if (user_check_role_includes ($loggedin_user["role"], "moderator")) {
 		if (!param_get_ok ("sid")) {
@@ -37,7 +37,7 @@ if (param_get_ok ("action") && !in_array ($action, $actions)) {
 						}
 					}
 					if (!$done) {
-						//utils_redirect ("s_info.php?sid=$sid");
+						utils_redirect ("s_info.php?sid=$sid#s_info_apply_reject_failed");
 					}
 				} else {
 					$type = suggestion_get_type ($sug);

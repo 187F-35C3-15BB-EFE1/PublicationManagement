@@ -71,7 +71,6 @@ function user_login ($email, $password) {
 	$password = sqle ($password);
 	$query = "SELECT uid FROM users WHERE email='$email' AND password='$password' LIMIT 1;";
 	$uid = sql_query_one ($query);
-	pg_last_error ();
 	if ($uid) {
 		setcookie ('user', $uid[0], 0, '/');
 	}
@@ -136,7 +135,6 @@ function user_get_loggedin () {
 }
 function user_set_role ($uid, $role) {
 	$role = user_role_to_num ($role);
-	$role = sqle ($role);
 	$uid = sqle ($uid);
 	$query = "UPDATE users SET role=$role WHERE uid='$uid';";
 	return sql_query ($query);
@@ -249,7 +247,7 @@ function publication_delete_by_pid ($pid) {
 	return sql_query ($query);
 }
 function publication_change_using_suggestion ($sug) {
-	$pid = $sug["to_pid"];
+	$pid = sqle ($sug["to_pid"]);
 	$changes = json_decode ($sug["changes"]);
 	$assignments = array ();
 	foreach ($changes as $k => $v) {

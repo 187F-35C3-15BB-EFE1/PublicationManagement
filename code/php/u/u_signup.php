@@ -27,7 +27,7 @@ if (param_get_ok ("email") || param_get_ok ("password")) {
 }
 
 if ($redirect) {
-	utils_redirect ("../home.php#signup_successful");
+	utils_redirect ("u_login.php#signup_successful");
 } else {
 	$page = page_replace_fields ($page, htmlem ($user), "{{", "}}");
 	if (!empty ($error_message)) {
