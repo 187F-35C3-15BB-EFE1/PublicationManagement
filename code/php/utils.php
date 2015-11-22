@@ -69,7 +69,7 @@ $user_roles = array ("null", "suggester", "moderator", "administrator");
 function user_login ($email, $password) {
 	$email = sqle ($email);
 	$password = sqle ($password);
-	$query = "SELECT uid FROM users WHERE email='$email' AND password='$password' LIMIT 1;";
+	$query = "SELECT uid FROM user WHERE email='$email' AND password='$password' LIMIT 1;";
 	$uid = sql_query_one ($query);
 	if ($uid) {
 		setcookie ('user', $uid[0], 0, '/');
@@ -82,7 +82,7 @@ function user_logout () {
 function user_signup ($email, $password) {
 	$email = sqle ($email);
 	$password = sqle ($password);
-	$query = "INSERT INTO users (email, password, role) VALUES ('$email', '$password', ".user_role_to_num ("suggester").");";
+	$query = "INSERT INTO user (email, password, role) VALUES ('$email', '$password', ".user_role_to_num ("suggester").");";
 	return sql_query ($query);
 }
 function user_signup_check ($email, $password) {
@@ -99,7 +99,7 @@ function wtflist ($data, $total, $offset) {
 function user_get_list ($offset, $count) {
 	$fields = array ("uid", "email", "role");
 
-	$query = "SELECT uid, email, role FROM users ORDER BY uid LIMIT $count OFFSET $offset;";
+	$query = "SELECT uid, email, role FROM user ORDER BY uid LIMIT $count OFFSET $offset;";
 	$users = sql_query_array ($query);
 	if ($users) {
 		$users = map_fieldsm ($fields, $users);
@@ -107,7 +107,7 @@ function user_get_list ($offset, $count) {
 	} else {
 		$users = array ();
 	}
-	$total = sql_query_int ("SELECT COUNT (*) FROM users;", 0);
+	$total = sql_query_int ("SELECT COUNT (*) FROM user;", 0);
 
 	return wtflist ($users, $total, $offset);
 }
@@ -115,7 +115,7 @@ function user_get_list ($offset, $count) {
 function user_get_by_uid ($uid) {
 	$fields = array ("uid", "email", "role");
 	$uid = sqle ($uid);
-	$query = "SELECT uid, email, role FROM users WHERE uid='$uid' LIMIT 1;";
+	$query = "SELECT uid, email, role FROM user WHERE uid='$uid' LIMIT 1;";
 	$user = sql_query_one ($query);
 	if ($user) {
 		$user = map_fields ($fields, $user);
@@ -136,7 +136,7 @@ function user_get_loggedin () {
 function user_set_role ($uid, $role) {
 	$role = user_role_to_num ($role);
 	$uid = sqle ($uid);
-	$query = "UPDATE users SET role=$role WHERE uid='$uid';";
+	$query = "UPDATE user SET role=$role WHERE uid='$uid';";
 	return sql_query ($query);
 }
 function user_num_to_role ($num) {
@@ -160,9 +160,19 @@ function user_check_role_includes ($role, $target) {
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
-	$query = "SELECT * FROM publications";
+	
+	/*
+SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords  FROM publication, author, written_by
+
+WHERE written_by.aid = author.aid AND publication.pid = written_by.pid
+
+GROUP BY written_by.pid, publication.pid, author.aid, written_by.aid, title, research_field, publication_year, venue, paper_type, link, keywords;
+	*/
+
+	$query = "SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication, author, written_by";
+	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid"
 	if (0 < strlen ($condition)) {
-		$query .= " WHERE $condition";
+		$query .= " AND ($condition)";
 	}
 	if ($order == "year") {
 		$order = "publication_year DESC,";
@@ -172,14 +182,15 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 		$order = "";
 	}
 	$order .= "pid";
-	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
+	$query .= " ORDER BY $order LIMIT $count OFFSET $offset";
+	$query .= " GROUP BY written_by.pid, publication.pid, title, research_field, publication_year, venue, paper_type, link, keywords;";
 	$pubs = sql_query_array ($query);
 	if ($pubs) {
 		$pubs = map_fieldsm ($fields, $pubs);
 	} else {
 		$pubs = array ();
 	}
-	$query = "SELECT COUNT (*) FROM publications";
+	$query = "SELECT COUNT (*) FROM publication";
 	if (0 < strlen ($condition)) {
 		$query .= " WHERE $condition";
 	}
@@ -222,12 +233,11 @@ function publication_get_related_list ($offset, $count, $order, $related, $pid) 
 	}
 }
 function publication_get_by_pid ($pid) {
-	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 	$pid = sqle ($pid);
-	$query = "SELECT * FROM publications WHERE pid='$pid' LIMIT 1;";
-	$pub = sql_query_one ($query);
-	if ($pub) {
-		$pub = map_fields ($fields, $pub);
+	$pubs = publication_get_list (0, 1, "", "pid='$pid'");
+	$pub = $pubs["data"];
+	if (count ($pub) <= 0) {
+		$pub = FALSE;
 	}
 	return $pub;
 }
@@ -235,15 +245,23 @@ function publication_add ($pub) {
 	$columns = array ();
 	$values = array ();
 	foreach ($pub as $k => $v) {
-		$columns[] = sqle ($k);
-		$values[] = "'".sqle ($v)."'";
+		if ($k == "authors") {
+		} else {
+			$columns[] = sqle ($k);
+			$values[] = "'".sqle ($v)."'";
+		}
 	}
-	$query = "INSERT INTO publications (".implode (",", $columns).") VALUES (".implode (",", $values).");";
-	return sql_query ($query);
+	$query = "INSERT INTO publication (".implode (",", $columns).") VALUES (".implode (",", $values).");";
+	$result = sql_query ($query);
+	$last_pid = sql_query_one ("SELECT lastval ();");
+	$aids = author_get_aids (explode (',', $v));
+	written_by_add ($last_pid, $aids);
+	return $result;
 }
 function publication_delete_by_pid ($pid) {
+	written_by_delete_by_pid ($pid);
 	$pid = sqle ($pid);
-	$query = "DELETE FROM publications WHERE pid=$pid;";
+	$query = "DELETE FROM publication WHERE pid=$pid;";
 	return sql_query ($query);
 }
 function publication_change_using_suggestion ($sug) {
@@ -251,10 +269,83 @@ function publication_change_using_suggestion ($sug) {
 	$changes = json_decode ($sug["changes"]);
 	$assignments = array ();
 	foreach ($changes as $k => $v) {
-		$assignments[] = sqle ($k)."='".sqle ($v)."'";
+		if ($k == "authors") {
+			written_by_delete_by_pid ($sug["to_pid"]);
+			$aids = author_get_aids (explode (',', $v));
+			written_by_add ($sug["to_pid"], $aids);
+		} else {
+			$assignments[] = sqle ($k)."='".sqle ($v)."'";
+		}
 	}
-	$query = "UPDATE publications SET ".implode (",", $assignments)." WHERE pid=$pid;";
+	$query = "UPDATE publication SET ".implode (",", $assignments)." WHERE pid=$pid;";
 	return sql_query ($query);
+}
+
+function written_by_delete_by_pid ($pid) {
+	$pid = sqle ($pid);
+	$query = "DELETE FROM written_by WHERE pid=$pid;";
+	return sql_query ($query);
+}
+function written_by_add ($pid, $aids) {
+	$values = array ();
+	$pid = sqle ($pid);
+	for ($i = 0; $i < count ($names); $i ++) {
+		$values[] = "($pid,".sqle ($names[$i]).")";
+	}
+	$query = "INSERT INTO written_by (pid,aid) VALUES ".implode (",", $values).";";
+	return sql_query ($query);
+}
+
+function author_addm ($names) {
+	$values = array ();
+	for ($i = 0; $i < count ($names); $i ++) {
+		$values[] = "('".sqle ($names[$i])."')";
+	}
+	$query = "INSERT INTO author (author_name) VALUES ".implode (",", $values).";";
+	return sql_query ($query);
+}
+function author_get_aids ($names) {
+	$aids = author_get_aids_actual ($names);
+	if (count ($aids) != count ($names)) {
+		$not_found = array ();
+		for ($i = 0; $i < count ($names); $i ++) {
+			$found = FALSE;
+			for ($j = 0; $j < count ($aids) && !$found; $j ++) {
+				if ($aids["author_name"] == $names[$i]) {
+					$found = TRUE;
+				}
+			}
+			if (!$found) {
+				$not_found[] = $names[$i];
+			}
+		}
+		author_addm ($not_found);
+		$aids = author_get_aids_actual ($names);
+	}
+}
+function author_get_aids_actual ($names) {
+	$fields = array ("aid", "author_name");
+	$query = "SELECT * FROM author WHERE ";
+	$conditions = array ();
+	for ($i = 0; $i < count ($names); $i ++) {
+		$conditions[] = "author_name = '".$names[$i]."'";
+	}
+	$query .= implode (" OR ", $conditions);
+	$aids = sql_query_array ($query);
+	if ($aids) {
+		$aids = map_fieldsm ($fields, $aids);
+		for ($i = 0; $i < count ($aids); $i ++) {
+			$type = suggestion_get_type ($aids[$i]);
+			$aids[$i]["type"] = $type;
+			if ($type == "new") {
+				$aids[$i]["title"] = json_decode ($aids[$i]["changes"])->title;
+			}
+		}
+	} else {
+		$aids = array ();
+	}
+
+	return $aids;
 }
 
 function suggestion_get_list ($offset, $count) {
@@ -274,14 +365,14 @@ function suggestion_get_list ($offset, $count) {
 	} else {
 		$sugs = array ();
 	}
-	$total = sql_query_int ("SELECT COUNT (*) FROM suggestions;", 0);
+	$total = sql_query_int ("SELECT COUNT (*) FROM suggestion;", 0);
 
 	return wtflist ($sugs, $total, $offset);
 }
 function suggestion_get_by_sid ($sid) {
 	$fields = array ("sid", "from_uid", "to_pid", "changes");
 	$sid = sqle ($sid);
-	$query = "SELECT * FROM suggestions WHERE sid='$sid' LIMIT 1;";
+	$query = "SELECT * FROM suggestion WHERE sid='$sid' LIMIT 1;";
 	$sug = sql_query_one ($query);
 	if ($sug) {
 		$sug = map_fields ($fields, $sug);
@@ -292,14 +383,14 @@ function suggestion_add_new ($new_pub, $uid) {
 	$uid = sqle ($uid);
 	$changes = json_encode ($new_pub);
 	$changes = sqle ($changes);
-	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, NULL, '$changes');";
+	$query = "INSERT INTO suggestion (from_uid, to_pid, changes) VALUES ($uid, NULL, '$changes');";
 	return sql_query ($query);
 }
 function suggestion_add_delete ($pid, $uid) {
 	$uid = sqle ($uid);
 	$pid = sqle ($pid);
 	$changes = "delete";
-	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
+	$query = "INSERT INTO suggestion (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
 	return sql_query ($query);
 }
 function suggestion_add_change ($pid, $new_pub, $columns, $uid) {
@@ -312,7 +403,7 @@ function suggestion_add_change ($pid, $new_pub, $columns, $uid) {
 	}
 	$changes = json_encode ($changes);
 	$changes = sqle ($changes);
-	$query = "INSERT INTO suggestions (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
+	$query = "INSERT INTO suggestion (from_uid, to_pid, changes) VALUES ($uid, $pid, '$changes');";
 	return sql_query ($query);
 }
 function suggestion_get_type ($sug) {
@@ -344,7 +435,7 @@ function suggestion_reject ($sug) {
 }
 function suggestion_delete ($sug) {
 	$sid = sqle ($sug["sid"]);
-	$query = "DELETE FROM suggestions WHERE sid=$sid;";
+	$query = "DELETE FROM suggestion WHERE sid=$sid;";
 	return sql_query ($query);
 }
 
