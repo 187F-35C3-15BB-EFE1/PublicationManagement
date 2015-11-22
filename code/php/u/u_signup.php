@@ -4,8 +4,8 @@ require "../utils.php";
 $page = page_load ("u_signup.html");
 
 $email = param_get ("email", "");
-$user = array ("email" => $email, "password" => $password);
 $password = param_get ("password", "");
+$user = array ("email" => $email, "password" => $password);
 $error_message = "";
 $redirect = FALSE;
 

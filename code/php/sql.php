@@ -5,6 +5,7 @@ $sql_con = FALSE;
 function sql_query ($query) {
 	global $sql_con;
 	sql_require ();
+	echo "<HR>".htmle ($query)."<HR>";
 	return pg_query ($sql_con, $query);
 }
 

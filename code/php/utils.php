@@ -73,7 +73,7 @@ $user_roles = array ("null", "suggester", "moderator", "administrator");
 function user_login ($email, $password) {
 	$email = sqle ($email);
 	$password = sqle ($password);
-	$query = "SELECT uid FROM user WHERE email='$email' AND password='$password' LIMIT 1;";
+	$query = "SELECT uid FROM \"user\" WHERE email='$email' AND password='$password' LIMIT 1;";
 	$uid = sql_query_one ($query);
 	if ($uid) {
 		setcookie ('user', $uid[0], 0, '/');
@@ -86,7 +86,7 @@ function user_logout () {
 function user_signup ($email, $password) {
 	$email = sqle ($email);
 	$password = sqle ($password);
-	$query = "INSERT INTO user (email, password, role) VALUES ('$email', '$password', ".user_role_to_num ("suggester").");";
+	$query = "INSERT INTO \"user\" (email, password, role) VALUES ('$email', '$password', ".user_role_to_num ("suggester").");";
 	return sql_query ($query);
 }
 function user_signup_check ($email, $password) {
@@ -103,7 +103,7 @@ function wtflist ($data, $total, $offset) {
 function user_get_list ($offset, $count) {
 	$fields = array ("uid", "email", "role");
 
-	$query = "SELECT uid, email, role FROM user ORDER BY uid LIMIT $count OFFSET $offset;";
+	$query = "SELECT uid, email, role FROM \"user\" ORDER BY uid LIMIT $count OFFSET $offset;";
 	$users = sql_query_array ($query);
 	if ($users) {
 		$users = map_fieldsm ($fields, $users);
@@ -111,7 +111,7 @@ function user_get_list ($offset, $count) {
 	} else {
 		$users = array ();
 	}
-	$total = sql_query_int ("SELECT COUNT (*) FROM user;", 0);
+	$total = sql_query_int ("SELECT COUNT (*) FROM \"user\";", 0);
 
 	return wtflist ($users, $total, $offset);
 }
@@ -119,7 +119,7 @@ function user_get_list ($offset, $count) {
 function user_get_by_uid ($uid) {
 	$fields = array ("uid", "email", "role");
 	$uid = sqle ($uid);
-	$query = "SELECT uid, email, role FROM user WHERE uid='$uid' LIMIT 1;";
+	$query = "SELECT uid, email, role FROM \"user\" WHERE uid='$uid' LIMIT 1;";
 	$user = sql_query_one ($query);
 	if ($user) {
 		$user = map_fields ($fields, $user);
@@ -140,7 +140,7 @@ function user_get_loggedin () {
 function user_set_role ($uid, $role) {
 	$role = user_role_to_num ($role);
 	$uid = sqle ($uid);
-	$query = "UPDATE user SET role=$role WHERE uid='$uid';";
+	$query = "UPDATE \"user\" SET role=$role WHERE uid='$uid';";
 	return sql_query ($query);
 }
 function user_num_to_role ($num) {
@@ -164,15 +164,25 @@ function user_check_role_includes ($role, $target) {
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
-	
-	/*
-SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords  FROM publication, author, written_by
 
-WHERE written_by.aid = author.aid AND publication.pid = written_by.pid
-
-GROUP BY written_by.pid, publication.pid, author.aid, written_by.aid, title, research_field, publication_year, venue, paper_type, link, keywords;
-	*/
-
+	$query = " FROM (SELECT pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication NATURAL JOIN written_by NATURAL JOIN author";
+	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid";
+	if ($order == "year") {
+		$order = "publication_year DESC,";
+	} else if ($order == "field") {
+		$order = "research_field,";
+	} else {
+		$order = "";
+	}
+	$order .= "pid";
+	$query .= " GROUP BY pid, title, research_field, publication_year, venue, paper_type, link, keywords) pubs";
+	if (0 < strlen ($condition)) {
+		$query .= " WHERE ($condition)";
+	}
+	$core = $query;
+	$query = "SELECT *$query";
+	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
+/*
 	$query = "SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication, author, written_by";
 	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid";
 	if (0 < strlen ($condition)) {
@@ -186,25 +196,23 @@ GROUP BY written_by.pid, publication.pid, author.aid, written_by.aid, title, res
 		$order = "";
 	}
 	$order .= "pid";
-	$query .= " ORDER BY $order LIMIT $count OFFSET $offset";
-	$query .= " GROUP BY written_by.pid, publication.pid, title, research_field, publication_year, venue, paper_type, link, keywords;";
+	$query .= " GROUP BY written_by.pid, publication.pid, title, research_field, publication_year, venue, paper_type, link, keywords";
+	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
+*/
 	$pubs = sql_query_array ($query);
 	if ($pubs) {
 		$pubs = map_fieldsm ($fields, $pubs);
 	} else {
 		$pubs = array ();
 	}
-	$query = "SELECT COUNT (*) FROM publication";
-	if (0 < strlen ($condition)) {
-		$query .= " WHERE $condition";
-	}
-	$total = sql_query_int ($query.";", 0);
+	$query = "SELECT COUNT (*)$core;";
+	$total = sql_query_int ($query, 0);
 
 	return wtflist ($pubs, $total, $offset);
 }
 function publication_get_list_by_q ($offset, $count, $order, $q) {
 	$q = sqle ($q);
-	$fields = array ("title", "authors", "venue", "papertype", "keywords");
+	$fields = array ("title", "authors", "venue", "paper_type", "keywords");
 	$mask = "'%$q%'";
 	$parts = array ();
 	for ($i = 0; $i < count ($fields); $i ++) {
@@ -243,7 +251,7 @@ function publication_get_by_pid ($pid) {
 	if (count ($pub) <= 0) {
 		$pub = FALSE;
 	}
-	return $pub;
+	return $pub[0];
 }
 function publication_add ($pub) {
 	$columns = array ();
@@ -355,7 +363,7 @@ function author_get_aids_actual ($names) {
 function suggestion_get_list ($offset, $count) {
 	// sid title email
 	$fields = array ("sid", "from_uid", "to_pid", "changes", "title", "email");
-	$query = "SELECT s.sid AS sid, s.from_uid AS from_uid, s.to_pid AS to_pid, s.changes AS changes, p.title AS title, u.email AS email FROM suggestions s LEFT OUTER JOIN users u ON s.from_uid = u.uid LEFT OUTER JOIN publications p ON s.to_pid = p.pid ORDER BY sid LIMIT $count OFFSET $offset;";
+	$query = "SELECT s.sid AS sid, s.from_uid AS from_uid, s.to_pid AS to_pid, s.changes AS changes, p.title AS title, u.email AS email FROM suggestion s LEFT OUTER JOIN \"user\" u ON s.from_uid = u.uid LEFT OUTER JOIN publication p ON s.to_pid = p.pid ORDER BY sid LIMIT $count OFFSET $offset;";
 	$sugs = sql_query_array ($query);
 	if ($sugs) {
 		$sugs = map_fieldsm ($fields, $sugs);
