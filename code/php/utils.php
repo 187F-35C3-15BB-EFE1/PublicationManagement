@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+error_reporting(-1);
+
 ignore_user_abort (TRUE);
 set_time_limit (30);
 
@@ -170,7 +174,7 @@ GROUP BY written_by.pid, publication.pid, author.aid, written_by.aid, title, res
 	*/
 
 	$query = "SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication, author, written_by";
-	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid"
+	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid";
 	if (0 < strlen ($condition)) {
 		$query .= " AND ($condition)";
 	}
