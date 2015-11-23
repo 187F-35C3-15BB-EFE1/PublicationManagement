@@ -9,6 +9,36 @@ set_time_limit (30);
 
 include "sql.php";
 
+function go_offline ($data, $mime) {
+	ignore_user_abort (true);
+	set_time_limit (60 * 2);
+	ob_start ();
+	echo $data;
+	$size = ob_get_length ();
+	header ("Content-Length: $size");
+	header ("Content-Type: $mime");
+	header ("Connection: close");
+	ob_end_flush ();
+	ob_flush ();
+	flush ();
+	if (session_id ()) {
+		session_write_close ();
+	}
+}
+function need_update_authors_view () {
+	$tdelta = 5 * 60;
+	$tprev = intval (file_get_contents ("timestamp"));
+	$tnow = time ();
+	$need = $tdelta < $tnow - $tprev;
+	if ($need) {
+		file_put_contents ("timestamp", strval ($tnow));
+	}
+	return $need;
+}
+function update_authors_view () {
+	sql_query ("REFRESH MATERIALIZED VIEW authors;");
+}
+
 function utils_redirect ($to) {
 	header ("Location: $to");
 }
