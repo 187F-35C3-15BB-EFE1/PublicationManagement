@@ -23,34 +23,28 @@
 
 		</nav>
 		<dl>
-			<dt>PID</dt>
+			<dt>ID</dt>
 			<dd>{{pid}}</dd>
-			<dt>title</dt>
+			<dt>Title</dt>
 			<dd>{{title}}</dd>
-			<dt>authors</dt>
+			<dt>Authors</dt>
 			<dd>{{authors}}</dd>
-			<dt>year</dt>
+			<dt>Year</dt>
 			<dd>{{publication_year}}</dd>
-			<dt>research field</dt>
+			<dt>Research field</dt>
 			<dd>{{research_field}}</dd>
-			<dt>paper type</dt>
+			<dt>Paper type</dt>
 			<dd>{{papertype}}</dd>
-			<dt>venue</dt>
+			<dt>Venue</dt>
 			<dd>{{venue}}</dd>
 			<!--<dt>keywords</dt>
 			<dd>{{keywords}}</dd>-->
-			<dt>link</dt>
-			<dd><a href='{{link}}'>link</a></dd>
+			<dt>Link</dt>
+			<dd><a href='{{link}}'>{{link}}</a></dd>
 		</dl>
-		[[<div style='border: 1px solid black; padding: 5px;'>
-			<a href='../s/s_create.php?pid={{pid}}&type=change' style='background: #f0f040;'>change</a><br>
-			<a href='../s/s_create.php?pid={{pid}}&type=delete' style='background: #f04040;'>delete</a>
-		</div>]]
-		</li>
-			<li><a href='p_list.php?pid={{pid}}&related=authors'>same authors</a></li>
-			<li><a href='p_list.php?pid={{pid}}&related=year'>same year</a></li>
-			<li><a href='p_list.php'>p_list</a></li>
-			<li><a href='../home.php'>home</a></li>
-		</ul>
+			<p><a class='btn btn-primary' href='p_list.php?pid={{pid}}&related=authors'>Same authors</a>
+			<a class='btn btn-primary' href='p_list.php?pid={{pid}}&related=year'>Same year</a></p>
+		[[<p><a href='../s/s_create.php?pid={{pid}}&type=change' class='btn btn-warning'>Change</a>
+			<a href='../s/s_create.php?pid={{pid}}&type=delete' class='btn btn-danger'>Delete</a></p>]]
 	</body>
 </html>

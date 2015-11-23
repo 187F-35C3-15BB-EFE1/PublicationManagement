@@ -164,30 +164,9 @@ function user_check_role_includes ($role, $target) {
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
-
-	$query = " FROM (SELECT pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication NATURAL JOIN written_by NATURAL JOIN author";
-	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid";
-	if ($order == "year") {
-		$order = "publication_year DESC,";
-	} else if ($order == "field") {
-		$order = "research_field,";
-	} else {
-		$order = "";
-	}
-	$order .= "pid";
-	$query .= " GROUP BY pid, title, research_field, publication_year, venue, paper_type, link, keywords) pubs";
-	if (0 < strlen ($condition)) {
-		$query .= " WHERE ($condition)";
-	}
+	$query = " SELECT pid, title, authors, research_field, publication_year, venue, link, keywords FROM publication NATURAL JOIN authors";
+	$query .= " WHERE $condition";
 	$core = $query;
-	$query = "SELECT *$query";
-	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
-/*
-	$query = "SELECT publication.pid, title, string_agg(author_name, ', ') AS authors, research_field, publication_year, venue, paper_type, link, keywords FROM publication, author, written_by";
-	$query .= " WHERE written_by.aid = author.aid AND publication.pid = written_by.pid";
-	if (0 < strlen ($condition)) {
-		$query .= " AND ($condition)";
-	}
 	if ($order == "year") {
 		$order = "publication_year DESC,";
 	} else if ($order == "field") {
@@ -196,9 +175,7 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 		$order = "";
 	}
 	$order .= "pid";
-	$query .= " GROUP BY written_by.pid, publication.pid, title, research_field, publication_year, venue, paper_type, link, keywords";
 	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
-*/
 	$pubs = sql_query_array ($query);
 	if ($pubs) {
 		$pubs = map_fieldsm ($fields, $pubs);
@@ -212,15 +189,12 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 }
 function publication_get_list_by_q ($offset, $count, $order, $q) {
 	$q = sqle ($q);
-	$fields = array ("title", "authors", "venue", "paper_type", "keywords");
-	$mask = "'%$q%'";
 	$parts = array ();
-	for ($i = 0; $i < count ($fields); $i ++) {
-		$parts[] = $fields[$i]." LIKE $mask";
-	}
 	if (is_numeric ($q)) {
 		$parts[] = "publication_year = $q";
 	}
+	$parts[] = "searchable @@ to_tsquery ('".implode (" & ", explode (" ", $q))."')";
+	$parts[] = "authors ILIKE '%$q%'";
 	$condition = implode (" OR ", $parts);
 	return publication_get_list ($offset, $count, $order, $condition);
 }
@@ -233,7 +207,7 @@ function publication_get_related_list ($offset, $count, $order, $related, $pid) 
 			$parts = array ();
 			$authors = explode (",", $pub["authors"]);
 			for ($i = 0; $i < count ($authors); $i ++) {
-				$parts[] = "authors LIKE '%".sqle ($authors[$i])."%'";
+				$parts[] = "authors ILIKE '%".sqle ($authors[$i])."%'";
 			}
 			$condition = implode (" OR ", $parts);
 		} else {
@@ -246,7 +220,7 @@ function publication_get_related_list ($offset, $count, $order, $related, $pid) 
 }
 function publication_get_by_pid ($pid) {
 	$pid = sqle ($pid);
-	$pubs = publication_get_list (0, 1, "", "pid='$pid'");
+	$pubs = publication_get_list (0, 1, "", "pid=$pid");
 	$pub = $pubs["data"];
 	if (count ($pub) <= 0) {
 		$pub = FALSE;

@@ -29,20 +29,20 @@
 			<dd>{{email}}</dd>
 			<dt>role</dt>
 			<dd>
-				<form action='u_info.php' style='border: 1px solid black; padding: 5px;'>
+				<form action='u_info.php'>
 					<input type='hidden' name='uid' value='{{uid}}' />
 					<select name='role'>
 						<option {{role_suggester}} value='suggester'>suggester</option>
 						<option {{role_moderator}} value='moderator'>moderator</option>
 						<option {{role_administrator}} value='administrator'>administrator</option>
-					</select><br>
-					<input type='submit' value='change' />
+					</select>
+					<input type='submit' value='change' class='btn btn-primary btn-xs' />
 				</form>
 			</dd>
 		</dl>
 		</li>
-			<li><a href='u_list.php'>u_list</a></li>
-			<li><a href='../home.php'>home</a></li>
+			<a class='btn btn-primary' href='u_list.php'>Users list</a>
+			<a class='btn btn-primary' href='../home.php'>Home</a>
 		</ul>
 	</body>
 </html>

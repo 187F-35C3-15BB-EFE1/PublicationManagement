@@ -11,6 +11,11 @@ $page = keep_or_omit ($page, "[[", "]]", $is_user);
 if (param_get_ok ("pid")) {
 	$pub = publication_get_by_pid ($pid);
 	if ($pub !== FALSE) {
+		foreach ($pub as $k => $v) {
+			if (empty ($v)) {
+				$pub[$k] = '-';
+			}
+		}
 		$page = page_replace_fields ($page, htmlem ($pub), "{{", "}}");
 		echo $page;
 	} else {

@@ -18,7 +18,7 @@
 		width: 150px;
 	}
 	.btn {
-		margin-left: -20px
+		margin-left: -20px;
 	}
 		</style>
 		<nav class=" navbar navbar-custom navbar-fixed-top">
@@ -47,23 +47,23 @@
 	    	<div class="col-xs-6">
 	      		<form  class="form-horizontal" action="p_list.php">
 	    			<div class="form-group">
-	    				<div class="col-xs-7">
-		   				<input class="form-control input-md" type="text" name="q" placeholder="Search">
+	    				<div class="col-xs-10">
+		   				<input class="form-control input-md" type="text" value="{{q}}" name="q" placeholder="Search">
 		   				</div>
-		   				<div class="col-xs-5">
+		   				<div class="col-xs-2">
 		   				<button type="submit input-group-btn" class="btn btn-primary input-md">Search</button>
 		   				</div>
 		   			</div>
 		   		</form>	
 	    	</div>
 	    	<div class="col-xs-6">
-	    		<b>Order by:</b>
-				[[<a class="sort btn btn-success" href='p_list.php?q={{q}}&order&related={{related}}&pid={{pid}}'>None</a>]]
-				[[<a class="sort btn btn-default"  href='#'>None</a>]],
-				[[<a class="sort btn btn-success"  href='p_list.php?q={{q}}&order=year&related={{related}}&pid={{pid}}'>Year</a>]]
-				[[<a class="sort btn btn-default"  href='#'>Year</a>]],
-				[[<a class="sort btn btn-success"  href='p_list.php?q={{q}}&order=field&related={{related}}&pid={{pid}}'>Research Field</a>]]
-				[[<a class="sort btn btn-default"  href='#'>Research Field</a>]]
+	    		<div class="col-xs-4"><b>Order by:</b></div>
+				<div class="col-xs-2">[[<a class="sort btn btn-success btn-sm" href='p_list.php?q={{q}}&order&related={{related}}&pid={{pid}}'>None</a>]]
+				[[<a class="sort btn btn-default btn-sm"  href='#'>None</a>]]</div>
+				<div class="col-xs-2">[[<a class="sort btn btn-success btn-sm"  href='p_list.php?q={{q}}&order=year&related={{related}}&pid={{pid}}'>Year</a>]]
+				[[<a class="sort btn btn-default btn-sm"  href='#'>Year</a>]]</div>
+				<div class="col-xs-2">[[<a class="sort btn btn-success btn-sm"  href='p_list.php?q={{q}}&order=field&related={{related}}&pid={{pid}}'>Research Field</a>]]
+				[[<a class="sort btn btn-default btn-sm"  href='#'>Research Field</a>]]</div>
 	    	</div>
 	    </div>
 	    <div class="row">
@@ -95,7 +95,7 @@
 				[[,<a href='p_list.php?page={{next}}&q={{q}}&order={{order}}&related={{related}}&pid={{pid}}'>{{next}}...</a>]]
 			</div>
 		</div>
+		[[<a class='btn btn-primary' style='margin-left: 10px;' href='../s/s_create.php'>Create suggestion</a>]]
     </div>
-		[[<a href='../s/s_create.php'>s_create</a>]]
 	</body>
 </html>

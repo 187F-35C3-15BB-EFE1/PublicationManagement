@@ -9,6 +9,9 @@
 			body {
 				padding: 70px;
 			}
+			.null_null {
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -30,7 +33,7 @@
 					</ul>
 				</div>
 
-				<div>
+				<div class="null_{{role}}">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<a href="#">{{role}}</a>
@@ -59,7 +62,6 @@
 
 
 	    <div class="container jumbotron" id="search-field">
-			<h2 id="title">Discover Science</h2>
 	    	
 	    	<div class="row">
 	       		<div class="col-xs-12">
@@ -72,24 +74,8 @@
 	    		</div>
 	    	</div>
 	    </div>
-		<ul>
-			<li>
-				u<br>
-				<ul>
-					[[<li>
-						<a href='u/u_list.php'>u_list</a>
-					</li>]]
-				</ul>
-			</li>
-			{[<li>
-				s<br>
-				<ul>
-					[[<li>
-						<a href='s/s_list.php'>s_list</a>
-					</li>]]
-					<li><a href='s/s_create.php'>s_create</a></li>
-				</ul>
-			</li>]}
-		</ul>
+		[[<a class='btn btn-primary' href='u/u_list.php'>User list</a>]]
+		{[[[<a class='btn btn-primary' href='s/s_list.php'>Suggestion list</a>]]
+		<a class='btn btn-primary' href='s/s_create.php'>Create suggestion</a>]}
 	</body>
 </html>
