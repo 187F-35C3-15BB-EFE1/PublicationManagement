@@ -161,9 +161,9 @@ function user_check_role_includes ($role, $target) {
 	return user_role_to_num ($target) <= user_role_to_num ($role);
 }
 
-// pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
+// pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "paper_type", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
-	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
+	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "paper_type", "link", "keywords");
 	$query = " FROM publication NATURAL JOIN authors";
 	$count ++;
 	$query .= " WHERE $condition";
