@@ -165,7 +165,7 @@ function user_check_role_includes ($role, $target) {
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 	$query = " FROM publication NATURAL JOIN authors";
-	var_dump ($condition);
+	$count ++;
 	$query .= " WHERE $condition";
 	$core = $query;
 	if ($order == "year") {
@@ -179,13 +179,20 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 	$query = "SELECT pid, title, authors, research_field, publication_year, venue, link, keywords $core";
 	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
 	$pubs = sql_query_array ($query);
+	$count --;
+	$total = 0;
 	if ($pubs) {
+		$total += $offset * $count;
+		$total += count ($pubs);
+		if (11 <= count ($pubs)) {
+			array_pop ($pubs);
+		}
 		$pubs = map_fieldsm ($fields, $pubs);
 	} else {
 		$pubs = array ();
 	}
 	$query = "SELECT COUNT (*)$core;";
-	$total = sql_query_int ($query, 0);
+	//$total = sql_query_int ($query, 0);
 
 	return wtflist ($pubs, $total, $offset);
 }
