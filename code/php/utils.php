@@ -164,7 +164,8 @@ function user_check_role_includes ($role, $target) {
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "papertype", "link", "keywords");
-	$query = " SELECT pid, title, authors, research_field, publication_year, venue, link, keywords FROM publication NATURAL JOIN authors";
+	$query = " FROM publication NATURAL JOIN authors";
+	var_dump ($condition);
 	$query .= " WHERE $condition";
 	$core = $query;
 	if ($order == "year") {
@@ -175,6 +176,7 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 		$order = "";
 	}
 	$order .= "pid";
+	$query = "SELECT pid, title, authors, research_field, publication_year, venue, link, keywords $core";
 	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
 	$pubs = sql_query_array ($query);
 	if ($pubs) {
@@ -191,7 +193,7 @@ function publication_get_list_by_q ($offset, $count, $order, $q) {
 	$q = sqle ($q);
 	$parts = array ();
 	if (is_numeric ($q)) {
-		$parts[] = "publication_year = $q";
+		$parts[] = "publication_year = '$q'";
 	}
 	$parts[] = "searchable @@ to_tsquery ('".implode (" & ", explode (" ", $q))."')";
 	$parts[] = "authors ILIKE '%$q%'";
