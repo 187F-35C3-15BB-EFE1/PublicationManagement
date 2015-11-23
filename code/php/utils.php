@@ -166,7 +166,9 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "paper_type", "link", "keywords");
 	$query = " FROM publication NATURAL JOIN authors";
 	$count ++;
-	$query .= " WHERE $condition";
+	if (0 < strlen ($condition)) {
+		$query .= " WHERE $condition";
+	}
 	$core = $query;
 	if ($order == "year") {
 		$order = "publication_year DESC,";
@@ -176,7 +178,7 @@ function publication_get_list ($offset, $count, $order, $condition = "") {
 		$order = "";
 	}
 	$order .= "pid";
-	$query = "SELECT pid, title, authors, research_field, publication_year, venue, link, keywords $core";
+	$query = "SELECT pid, title, authors, research_field, publication_year, venue, paper_type, link, keywords $core";
 	$query .= " ORDER BY $order LIMIT $count OFFSET $offset;";
 	$pubs = sql_query_array ($query);
 	$count --;
@@ -200,7 +202,7 @@ function publication_get_list_by_q ($offset, $count, $order, $q) {
 	$q = sqle ($q);
 	$parts = array ();
 	if (is_numeric ($q)) {
-		$parts[] = "publication_year = '$q'";
+		$parts[] = "publication_year LIKE '$q'";
 	}
 	$parts[] = "searchable @@ to_tsquery ('".implode (" & ", explode (" ", $q))."')";
 	//$parts[] = "authors ILIKE '%$q%'";
@@ -211,7 +213,7 @@ function publication_get_related_list ($offset, $count, $order, $related, $pid) 
 	$pub = publication_get_by_pid ($pid);
 	if ($pub) {
 		if ($related == "year") {
-			$condition = "publication_year = ".$pub["publication_year"];
+			$condition = "publication_year LIKE '".$pub["publication_year"]."'";
 		} else if ($related == "authors") {
 			$parts = array ();
 			$authors = explode (",", $pub["authors"]);
@@ -241,6 +243,7 @@ function publication_add ($pub) {
 	$values = array ();
 	foreach ($pub as $k => $v) {
 		if ($k == "authors") {
+			$aids = author_get_aids (explode (',', $v));
 		} else {
 			$columns[] = sqle ($k);
 			$values[] = "'".sqle ($v)."'";
@@ -248,8 +251,7 @@ function publication_add ($pub) {
 	}
 	$query = "INSERT INTO publication (".implode (",", $columns).") VALUES (".implode (",", $values).");";
 	$result = sql_query ($query);
-	$last_pid = sql_query_one ("SELECT lastval ();");
-	$aids = author_get_aids (explode (',', $v));
+	$last_pid = sql_query_one ("SELECT lastval ();")[0];
 	written_by_add ($last_pid, $aids);
 	return $result;
 }
@@ -284,8 +286,9 @@ function written_by_delete_by_pid ($pid) {
 function written_by_add ($pid, $aids) {
 	$values = array ();
 	$pid = sqle ($pid);
+
 	for ($i = 0; $i < count ($aids); $i ++) {
-		$values[] = "($pid,".sqle ($aids[$i]).")";
+		$values[] = "($pid,".sqle ($aids[$i]["aid"]).")";
 	}
 	$query = "INSERT INTO written_by (pid,aid) VALUES ".implode (",", $values).";";
 	return sql_query ($query);
@@ -306,7 +309,7 @@ function author_get_aids ($names) {
 		for ($i = 0; $i < count ($names); $i ++) {
 			$found = FALSE;
 			for ($j = 0; $j < count ($aids) && !$found; $j ++) {
-				if ($aids["author_name"] == $names[$i]) {
+				if ($aids[$j]["author_name"] == $names[$i]) {
 					$found = TRUE;
 				}
 			}
@@ -317,6 +320,7 @@ function author_get_aids ($names) {
 		author_addm ($not_found);
 		$aids = author_get_aids_actual ($names);
 	}
+	return $aids;
 }
 function author_get_aids_actual ($names) {
 	$fields = array ("aid", "author_name");

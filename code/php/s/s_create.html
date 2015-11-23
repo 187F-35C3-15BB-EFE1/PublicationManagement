@@ -12,6 +12,18 @@ table, tr, th, td {
 	border-collapse: collapse;
 	border: 1px solid black;
 }
+table {
+	table-layout: fixed;
+	word-wrap: break-word;
+	}
+th, td {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.alla {
+margin-left:0px;
+width:100%;
+}
 		</style>
 		<nav class=" navbar navbar-custom navbar-fixed-top">
 			<div class="container-fluid">
@@ -54,7 +66,7 @@ table, tr, th, td {
 				</tr>]}
 				{[<tr>
 					<td>new</td>
-					[[<td><input type='text' name='new_{{column_name}}' value='{{new_{{column_name}}}}' /></td>]]
+					[[<td><input class="alla" type='text' name='new_{{column_name}}' value='{{new_{{column_name}}}}' /></td>]]
 				</tr>]}
 				{[<tr>
 					<td>change</td>

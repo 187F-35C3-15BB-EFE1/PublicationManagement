@@ -25,6 +25,7 @@ if (user_check_role_includes ($loggedin_user["role"], "suggester")) {
 			$old_pub = TRUE;
 		}
 		if ($old_pub) {
+			$empty = FALSE;
 			if ($type != "delete") {
 				$new_pub = array ();
 				for ($i = 0; $i < count ($columns); $i ++) {
