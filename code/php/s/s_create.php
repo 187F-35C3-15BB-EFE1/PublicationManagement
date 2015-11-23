@@ -10,7 +10,7 @@ $confirm = param_get ("confirm", "") == "confirm";
 $changed = param_get_array ("changed", array ());
 $error_message = "";
 $redirect = FALSE;
-$columns = array ("title", "authors", "publication_year", "research_field", "venue", "papertype", "link"/*, "keywords"*/);
+$columns = array ("title", "authors", "publication_year", "research_field", "venue", "paper_type", "link"/*, "keywords"*/);
 
 $loggedin_user = user_get_loggedin ();
 
