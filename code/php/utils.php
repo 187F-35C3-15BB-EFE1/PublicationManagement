@@ -203,7 +203,7 @@ function publication_get_list_by_q ($offset, $count, $order, $q) {
 		$parts[] = "publication_year = '$q'";
 	}
 	$parts[] = "searchable @@ to_tsquery ('".implode (" & ", explode (" ", $q))."')";
-	$parts[] = "authors ILIKE '%$q%'";
+	//$parts[] = "authors ILIKE '%$q%'";
 	$condition = implode (" OR ", $parts);
 	return publication_get_list ($offset, $count, $order, $condition);
 }
