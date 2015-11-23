@@ -329,13 +329,6 @@ function author_get_aids_actual ($names) {
 	$aids = sql_query_array ($query);
 	if ($aids) {
 		$aids = map_fieldsm ($fields, $aids);
-		for ($i = 0; $i < count ($aids); $i ++) {
-			$type = suggestion_get_type ($aids[$i]);
-			$aids[$i]["type"] = $type;
-			if ($type == "new") {
-				$aids[$i]["title"] = json_decode ($aids[$i]["changes"])->title;
-			}
-		}
 	} else {
 		$aids = array ();
 	}
