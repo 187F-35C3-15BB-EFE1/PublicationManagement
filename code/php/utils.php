@@ -164,7 +164,7 @@ function user_check_role_includes ($role, $target) {
 // pubs: $fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "paper_type", "link", "keywords");
 function publication_get_list ($offset, $count, $order, $condition = "") {
 	$fields = array ("pid", "title", "authors", "research_field", "publication_year", "venue", "paper_type", "link", "keywords");
-	$query = " FROM publication OUTER JOIN authors";
+	$query = " FROM publication LEFT OUTER JOIN authors";
 	$count ++;
 	$query .= " WHERE $condition";
 	$core = $query;
