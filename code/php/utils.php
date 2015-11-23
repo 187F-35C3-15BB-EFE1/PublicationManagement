@@ -284,8 +284,8 @@ function written_by_delete_by_pid ($pid) {
 function written_by_add ($pid, $aids) {
 	$values = array ();
 	$pid = sqle ($pid);
-	for ($i = 0; $i < count ($names); $i ++) {
-		$values[] = "($pid,".sqle ($names[$i]).")";
+	for ($i = 0; $i < count ($aids); $i ++) {
+		$values[] = "($pid,".sqle ($aids[$i]).")";
 	}
 	$query = "INSERT INTO written_by (pid,aid) VALUES ".implode (",", $values).";";
 	return sql_query ($query);
